@@ -1,4 +1,4 @@
-\ProvidesClass{Experiment}
+\ProvidesClass{../source/Experiment}
 \LoadClass{ctexart}
 \RequirePackage{xeCJK}
 \RequirePackage{CJKnumb}
