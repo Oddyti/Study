@@ -18,6 +18,8 @@
 \RequirePackage{multirow}
 \RequirePackage{subfigure}
 \RequirePackage{listings}
+\RequirePackage{lmodern}
+
 
 % 自定义信息参数传递
 	\newcommand\articletitle[1]{\def\@articletitle{#1}}		%标题
@@ -39,7 +41,7 @@
 
 %页面参数
 	%主要字体 斜体+楷体 粗体=黑体
-	\setCJKmainfont[ItalicFont={KaiTi},BoldFont={SimHei}]{SimSun}
+	% \setCJKmainfont[ItalicFont={KaiTi},BoldFont={SimHei}]{SimSun}
 	%页边距
 	\geometry{top=1in,bottom=1in,left=1in,right=1in}
 	%行距
