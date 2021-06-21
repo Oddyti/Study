@@ -21,6 +21,8 @@
 \RequirePackage{lmodern}
 
 
+\setlength{\headheight}{15pt}
+
 % 自定义信息参数传递
 	\newcommand\articletitle[1]{\def\@articletitle{#1}}		%标题
 	\newcommand\major[1]{\def\@major{#1}}					%专业
