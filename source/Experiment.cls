@@ -1,4 +1,4 @@
-\ProvidesClass{zjureport}
+\ProvidesClass{Experiment}
 \LoadClass{ctexart}
 \RequirePackage{xeCJK}
 \RequirePackage{CJKnumb}
@@ -134,7 +134,7 @@
 \newcommand{\makeheader}{
 \begin{figure}[h]
   \begin{minipage}{0.7\linewidth}
-    \centerline{\includegraphics[width=\linewidth]{head.jpg}}
+    \centerline{\includegraphics[width=\linewidth]{../source/logo/head.jpg}}
   \end{minipage}
   \hfill
   \begin{minipage}{.3\linewidth}
@@ -164,7 +164,7 @@
 \newcommand{\makecover}{
   \begin{center}
     \begin{center}
-      \includegraphics[width=0.8\linewidth]{cover.png}
+      \includegraphics[width=0.8\linewidth]{../source/logo/cover.png}
     \end{center}
     \vspace{1cm}
     \bfseries\huge{本科实验报告}\\
