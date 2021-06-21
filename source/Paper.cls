@@ -1,4 +1,4 @@
-\ProvidesClass{zjureport}
+\ProvidesClass{../source/Paper}
 \LoadClass{ctexart}
 %宏包
 \RequirePackage{xeCJK}
