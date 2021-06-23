@@ -589,6 +589,16 @@ endmodule
                     \includegraphics[width = 1\textwidth]{mcu-sim}
                     \caption{mcu仿真图}
                 \end{figure}
+            仿真分析：
+
+            \begin{enumerate}
+                \item 开始reset = 1，clk上沿到来时，电路处于RESET状态，输出play = 0，nextsong = 0，reset\_ play = 1。 
+                \item 第一条红线时，reset = 0，play \_ pause = 0，电路进入PAUSE状态。
+                \item 第二条红线时，reset = 0, play \_ pause = 1，相当于按下paly按钮，电路进入PLAY状态，play = 1。 
+                \item 第三条红线时，reset = 0，play\_ pause = 1，电路进入PAUSE状态，输出play = 0。 
+                \item 第四条红线时，reset = 0, play\_ pause = 0，next = 1，相当于按下next按钮，电路进入NEXT状态。
+            \end{enumerate}
+
             \subsubsection{乐曲读取song \_ reader模块}
                 \begin{figure}[H]
                     \centering
