@@ -605,6 +605,17 @@ endmodule
                     \includegraphics[width = 1\textwidth]{song-sim}
                     \caption{song \_ reader仿真图}
                 \end{figure}
+
+            仿真分析：
+
+            \begin{enumerate}
+                \item 第一条红线时，reset = 1, 电路进入RESET状态。
+                \item 第二条红线时，reset = 0, play = 0，电路保持RESET状态。
+                \item 第三条红线时，reset = 0, play = 1，电路接收到mcu发来的播放命令，进入NEW\_ NOTE状态，new \_ note = 1，要求note\_ player模块播放音符。 
+                \item 第四条红线时，电路进入WAIT状态，等待播放停止或者音符播放完毕。
+                \item 第五条红线时 ，note\_ done = 1，音符播放完毕，电路进入NEXT\_ NOTE状态，以延迟一个时钟周期输出信号，配合song\_ rom 的读取要求。
+                \item 第六条红线时 ，电路进入NEW\_ NOTE状态，播放新的音符。
+            \end{enumerate}
             \subsubsection{音符播放note \_ player模块}
                 \begin{figure}[H]
                     \centering
