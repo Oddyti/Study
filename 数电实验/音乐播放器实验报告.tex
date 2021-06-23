@@ -626,8 +626,36 @@ endmodule
             仿真分析：
             
             由仿真图可知，正弦波形的频率与note \_ to\_ load 的值呈正相关。同时只有当play \_ enabe = 1时才会输出波形。
-            
+
             \subsubsection{次顶层music \_ player}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width = 1\textwidth]{music}
+                    \caption{次顶层music\_ player仿真图}
+                \end{figure}
+            根据仿真图，波形基本符合要求。
 
+        \subsection{vivado实现}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 1\textwidth]{schematic}
+                \caption{vivado实现}
+            \end{figure}
+        \subsection{实验中遇到的问题和解决方法}
+            \begin{enumerate}
+                \item 在最终上板测试阶段，发现播放歌曲的时候，当播放完毕时，无法自动停止。在老师的指导下，发现是我song \_ reader模块的结束判断代码出了问题。具体表现在我将判断条件duration = 0在代码中写成了$\sim$duration，但是由于duration并非1位数据，所以不能用简单的取反判断，应该用按位取反或duration == 0作为判断条件。在修改判断条件为duration ==0后，问题得到了解决。
+            \end{enumerate}
+    \section{思考题}
+        \subsection{在实验中，为什么next\_button、play\_pause\_button两个按键需要消颤动及同步化处理，而reset按键不需要消颤动及同步化处理?}
+        因为reset是置零信号，当reset=1时，系统置零，之后reset为0或为1系统内部该置零的信号都为0，reset的颤动对系统无影响。而next\_button和 play \_pause\_button 都会影响系统内部状态的转换，如果next输入不稳定，则不能达到播放下一首的目的，可能会跳到后面几首歌，也就是会使播放的下一首歌不确定;如果play\_pause 输入不确定，则系统会不断地在播放和暂停之间切换，这不仅会增加系统的损耗，而且会输出断断续续的音乐，达不到预期效果。
+        \subsection{在主控制器(mcu）设计中，是否存在接收不到按键信息﹖若存在，概率多大?有没必要修改设
+        计?}
+        存在。在RESET到 PAUSE状态转换过程中和NEXT到 PLAY状态转换过程中没有判断 next和play\_pause，这期间按下按钮接收不到按键信息。概率很小，因为只有一个时钟周期，因此没有必要修改设计。
+    
+    \section{实验心得}
+    本次实验一开始我其实是无从下手的。所以我就按照老师的建议，去做了前的涉及到的DDS子实验。在花了半天的时间后，我完成了DDS实验。然后我去看了老师提供的视频，学会了二段式描述中状态机。
 
+    之后我便开始了最后的实验，一开始面对复杂的次顶层，我不知道从何开始，于是我便一个小模块一个小模块的设计。并且每个小模块的顶层文件和调用的子模块分开写，保证文件管理的清晰明确。
+
+    在设计完一个一个的小模块之后，一开始觉得复杂的次顶层也慢慢变得清晰简单起来。最后也顺利完成了实验。
 \end{document}
