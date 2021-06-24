@@ -19,6 +19,11 @@
 \RequirePackage{listings}
 \RequirePackage{lmodern}
 
+
+% 定义°为\degree 不需要$, \deg 需要$
+\def\deg{^{\circ}}
+\def\degree{${}^{\circ}$}
+
 \linespread{1.2}
 \geometry{top=1in,bottom=1in,left=1in,right=1in}
 \setcounter{secnumdepth}{3}

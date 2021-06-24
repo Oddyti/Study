@@ -20,6 +20,10 @@
 \RequirePackage{listings}
 \RequirePackage{lmodern}
 
+% 定义°为\degree 不需要$, \deg 需要$
+\def\deg{^{\circ}}
+\def\degree{${}^{\circ}$}
+
 
 \setlength{\headheight}{15pt}
 
