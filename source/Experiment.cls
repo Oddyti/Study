@@ -152,8 +152,8 @@
 \begin{table}[!htbp]
   \centering
   \begin{tabular*}{\linewidth}{llllll}
-    课程名称： & \zjuu[150pt]\@course   & 指导老师： & \zjuu[100pt]\@instructor   & 成绩：        \zjuu[50pt]\@grades \\
-    实验名称： & \zjuu[150pt]\@expname & 实验类型： &\zjuu[100pt]\@exptype & 同组学生姓名： \zjuu[50pt]\@partner
+    课程名称： & \zjuu[200pt]\@course   & 指导老师： & \zjuu[50pt]\@instructor   & 成绩：        \zjuu[50pt]\@grades \\
+    实验名称： & \zjuu[200pt]\@expname & 实验类型： &\zjuu[50pt]\@exptype & 同组学生姓名： \zjuu[50pt]\@partner
   \end{tabular*}
 \end{table}
 \thispagestyle{empty}
