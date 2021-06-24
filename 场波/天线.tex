@@ -259,6 +259,96 @@
 
     \section{实验收获与体会}
 
-        
     \setcounter{section}{0}
+
+    \begin{center}
+        \bfseries\Large{喇叭天线的幅射特性测量}
+    \end{center}
+
+    \section{实验目的}
+        揭示喇叭天线的幅射特性。 \par 
+        覆盖的基本概念：
+        \begin{itemize}
+            \item 天线辐射方向图
+            \item 波束宽度
+            \item 天线的极化特性
+            \item 电磁波在空间传播中与距离的关系
+        \end{itemize}
+    \section{实验过程与结果}
+        \subsection{电磁波在空间传播中与距离的关系测量}
+            \begin{table}[H]
+                \caption{天线距离与接收功率关系}
+                \centering
+                \begin{tabular}{|c|c|c|}
+                \hline
+                距离R(m) & 实验测量值(dB) & 相对归一化功率(dB) \\ \hline
+                1.0    & -40.0     & 0.0         \\ \hline
+                1.1    & -41.8     & -1.8        \\ \hline
+                1.2    & -43.6     & -3.6        \\ \hline
+                1.3    & -45.3     & -5.3        \\ \hline
+                1.4    & -46.8     & -6.8        \\ \hline
+                \end{tabular}
+            \end{table}
+        \subsection{极化测量}
+            \subsubsection{天线极化测量}
+                \begin{table}[H]
+                    \caption{发射喇叭天线极化特性}
+                    \centering
+                    \begin{tabular}{|c|c|c|}
+                    \hline
+                    发射喇叭天线角度                 & 实验测量值(dB) & 相对归一化功率(dB) \\ \hline
+                    0\degree  & -40.0     & 0.0         \\ \hline
+                    10\degree & -47.0     & -7.0        \\ \hline
+                    20\degree & -55.6     & -15.6       \\ \hline
+                    30\degree & -61.6     & -21.6       \\ \hline
+                    40\degree & -63.6     & -23.6       \\ \hline
+                    50\degree & -68.4     & -28.4       \\ \hline
+                    60\degree & -71.0     & -31.0       \\ \hline
+                    70\degree & -76.0     & -36.0       \\ \hline
+                    80\degree & -80.0     & -40.0       \\ \hline
+                    90\degree & -80.0     & -40.0       \\ \hline
+                    \end{tabular}
+                \end{table}
+            \subsubsection{极化栅网特性测量}
+                \begin{table}[H]
+                    \caption{极化栅网极化特性}
+                    \centering
+                    \begin{tabular}{|c|c|c|}
+                    \hline
+                    极化栅网角度                   & 实验测量值(dB) & 相对归一化功率(dB) \\ \hline
+                    0\degree  & -40.0     & 0.0         \\ \hline
+                    90\degree & -69.3     & -29.3       \\ \hline
+                    45\degree & -44.5     & -4.5        \\ \hline
+                    \end{tabular}
+                \end{table}
+        \subsection{喇叭天线辐射方向图测量}
+        \begin{table}[H]
+            \caption{天线水平方向图测量数据}
+            \centering
+            \resizebox{\textwidth}{!}{
+            \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            天线水平方向转角(\degree) & -90      & -80      & -70   & -60   & -50   & -40   & -30   & -20   & -10   & 0     & 10    & 20    & 30    & 40    & 50    & 60    & 70    & 80    & 90       \\ \hline
+            实验测量值(dB)                        & $\infty$ & $\infty$ & -80.0 & -73.8 & -74.0 & -66.8 & -57.8 & -49.8 & -43.0 & -40.0 & -44.2 & -52.6 & -61.0 & -63.4 & -66.8 & -70.5 & -77.5 & -80.0 & $\infty$ \\ \hline
+            相对归一化功率                          & $\infty$ & $\infty$ & -40.0 & -33.8 & -34.0 & -26.8 & -17.8 & -9.8  & -3.0  & 0.0   & -4.2  & -12.6 & -21.0 & -23.4 & -26.8 & -30.5 & -37.5 & -40.0 & $\infty$ \\ \hline
+            \end{tabular}}
+            \end{table}
+
+            \begin{table}[H]
+                \caption{天线垂直方向测量数据}
+                \centering
+                \resizebox{\textwidth}{!}{
+                \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+                \hline
+                天线垂直方向转角(\degree) & -60   & -50   & -40   & -30   & -20   & -10   & 0     & 10    & 20    & 30    & 40    & 50    & 60    \\
+                \hline
+                实验测量值(dB)                        & -68.6 & -66.2 & -65.5 & -65.2 & -58.6 & -51.5 & -50.0 & -51.5 & -57.2 & -65.0 & -66.0 & -66.2 & -69.0 \\
+                \hline
+                相对归一化功率(dB)                      & -18.6 & -16.2 & -15.5 & -15.2 & -8.6  & -1.5  & 0.0   & -1.5  & -7.2  & -15.0 & -16.0 & -16.2 & -19.0 \\
+                \hline
+                \end{tabular}}
+                \end{table}
+    \section{思考题}
+
+    \section{实验收获与体会}
 \end{document}
