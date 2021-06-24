@@ -20,9 +20,6 @@
 \RequirePackage{listings}
 \RequirePackage{lmodern}
 
-% 定义°为\degree 不需要$, \deg 需要$
-\def\deg{^{\circ}}
-\def\degree{${}^{\circ}$}
 
 
 \setlength{\headheight}{15pt}
@@ -43,11 +40,12 @@
 %自定义命令
 	%脚注
 	\newcommand{\Footnote}[1]{\footnote{\small\kaishu #1}}
+	% 定义°为\degree 不需要$, \deg 需要$
+	\def\deg{^{\circ}}
+	\def\degree{${}^{\circ}$}
 %
 
 %页面参数
-	%主要字体 斜体+楷体 粗体=黑体
-	% \setCJKmainfont[ItalicFont={KaiTi},BoldFont={SimHei}]{SimSun}
 	%页边距
 	\geometry{top=1in,bottom=1in,left=1in,right=1in}
 	%行距
