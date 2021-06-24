@@ -19,7 +19,7 @@
 \RequirePackage{subfigure}
 \RequirePackage{listings}
 \RequirePackage{lmodern}
-
+\RequirePackage{amssymb}
 
 
 \setlength{\headheight}{15pt}
