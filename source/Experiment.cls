@@ -130,7 +130,7 @@
     showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
     numberstyle         =   \footnotesize\fontspec{Hack},    % 行号的样式，小五号，tt等宽字体
     showstringspaces    =   false,
-    captionpos          =   b,      % 这段代码的名字所呈现的位置，t指的是top上面
+    captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
     frame               =   leftline,   % 显示边框
     tabsize             =   2,
     breaklines          =   true,   % 自动换行，建议不要写太长的行
