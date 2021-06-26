@@ -75,44 +75,11 @@
                 \end{figure}
 
                 根据原理框图设计出mcu顶层代码如下：
-                \begin{lstlisting}[name = mcu顶层代码]
-    module mcu (
-        clk,            //100MHz时钟信号
-        reset,          //复位信号，高电平有效
-        play_pause,     //来自按键处理模块的“播放/暂停”控制信号，一个时钟周期宽度的脉冲
-        next,           //来自按键处理模块的“下一曲”控制信号，一个时钟周期宽度的脉冲
-        play,           //输出控制信号，高电平表示播放，控制song \_ reader模块是否要播放
-        reset_play,     //时钟周期宽度的高电平复位脉冲reset play，用于同时复位模块song \_ reader和 note \_ player
-        song_done,      //song \_ reader模块的应答信号，一个时钟周期宽度的高电平脉冲，表示一曲播放结束
-        song            //当前播放乐曲的序号
-    );
-        input clk, reset, play_pause, next, song_done;
-        output play, reset_play;
-        output [1:0] song;
-        wire NextSong;
+                \lstinputlisting[
+                    language  =   Verilog,
+                    title     =   {mcu顶层代码}
+                ]{src/mcu.v}
 
-        //mcu控制器
-        mcu_controller m_ctrl1 (
-            .clk(clk),
-            .reset(reset),
-            .play_pause(play_pause),
-            .next(next),
-            .song_done(song_done),
-            .play(play),
-            .reset_play(reset_play),
-            .NextSong(NextSong)
-        );
-
-        //2位二进制计数器
-        counter_n #(.n(4), .counter_bits(2)) m_counter(
-            .clk(clk),
-            .en(NextSong),
-            .r(reset),
-            .q(song),
-            .co()
-        );
-    endmodule
-                \end{lstlisting}
                 控制器的工作流程图如图6.46所示，控制器设置初始复位(RESET)、播放(PLAY)、暂停(PAUSE)和下一首(NEXT)四种状态。系统复位后，经RESET状态初始化后进入PAUSE状态，等待各种命令输入; play \_ pause脉冲信号使系统在 PLAY、PAUSE两状态之间互转;在 PLAY或 PAUSE 状态下，若按下next \_ button按钮，则使系统在进入NEXT状态，输出reset \_  play脉冲复位song  \_ reader和 note \_ player两个模块,同时输出脉冲 NextSong 乐曲序号计数器加1，进入下一曲播放;另外，在PLAY状态时，若乐曲播放结束(song \_ done有效)则结束播放，经 RESET状态复位 song \_ reader和 note \_ player两个模块，并进入 PAUSE状态，再次等待各种命令输入。
 
                 \begin{figure}[H]
@@ -122,81 +89,10 @@
                 \end{figure}
 
                 根据原理框图设计出mcu控制器代码如下：
-                \begin{lstlisting}[name = mcu控制器代码]
-    module mcu_controller (
-        clk,
-        reset,
-        play_pause,
-        next,
-        song_done,
-        play,
-        reset_play,
-        NextSong    
-    );
-        input clk, reset, play_pause, next, song_done;
-        output reg play, reset_play, NextSong;
-        parameter RESET = 0, PAUSE = 1, PLAY = 2, NEXT = 3;
-
-        reg [1:0] state;        //状态信号
-        reg [1:0] nextstate;    //驱动信号
-
-        //状态寄存器
-        always @(posedge clk ) begin
-            if(reset) state = RESET;
-            else state = nextstate;
-        end
-
-        //下一状态和输出
-        always @(*) begin
-            play = 0;NextSong = 0;reset_play = 0;
-            case(state)
-                RESET:
-                    begin 
-                        play = 0;
-                        NextSong = 0;
-                        reset_play = 1;
-                        nextstate = PAUSE; 
-                    end
-                PAUSE:
-                    begin
-                        play = 0;
-                        NextSong = 0;
-                        reset_play = 0;
-                        if(play_pause) nextstate = PLAY;
-                        else
-                            begin
-                                if(next) nextstate = NEXT;
-                                else nextstate = PAUSE;
-                            end 
-                    end
-                PLAY:
-                    begin
-                        play = 1;
-                        NextSong = 0;
-                        reset_play = 0;
-                        if(play_pause) nextstate = PAUSE;
-                        else 
-                            begin
-                                if(next) nextstate = NEXT;
-                                else 
-                                    begin
-                                        if(song_done) nextstate = RESET;
-                                        else nextstate = PLAY;
-                                    end
-                            end
-                    end
-                NEXT:
-                    begin 
-                        play = 0;
-                        NextSong = 1;
-                        reset_play = 1;
-                        nextstate = PLAY;
-                    end
-                default: nextstate = RESET;
-            endcase
-        end
-    endmodule
-                \end{lstlisting}
+                \lstinputlisting[
+                    language  =   Verilog,
+                    title     =   {mcu控制器代码}
+                ]{src/mcu_controller.v}
 
             \subsubsection{乐曲读取模块song \_ reader的设计}
 
@@ -235,60 +131,10 @@
                 \end{figure}
 
                 根据原理框图设计出song \_ reader顶层代码如下：
-                \begin{lstlisting}[name = song _ reader顶层代码]
-    module song_reader (
-        song,           //来自mcu的控制信号，当前播放乐曲的序号
-        clk,            //100MHz时钟信号
-        reset,          //复位信号，高电平有效
-        note_done,      //即模块note player的应答信号，一个时钟周期宽度的脉冲，表示一个音符播放结束并索取新音符
-        play,           //来自mcu的控制信号，高电平要求播放
-        song_done,      //给mcu 的应答信号，当乐曲播放结束，输出-一个时钟周期宽度的脉冲，表示乐曲播放结束
-        new_note,       //给模块note \_ playe的控制信号，一个时钟周期宽度的高电平脉冲，表示新的音符需播放
-        note,           //音符标记
-        duration        //音符的持续时间
-    );
-        input clk, reset, play, note_done;
-        input [1:0] song;
-        output song_done, new_note;
-        output [5:0] note, duration;
-        wire [4:0] q;   //song \_ rom的低5位地址
-        wire co;        //地址计数器进位
-
-        //地址计数器
-        counter_n #(.n(32), .counter_bits(5)) song_counter(
-            .clk(clk),
-            .en(note_done),
-            .r(reset),
-            .q(q),
-            .co(co)
-        );
-
-        //控制器
-        song_reader_controller s_ctrl1(
-            .clk(clk), 
-            .reset(reset), 
-            .play(play), 
-            .note_done(note_done), 
-            .new_note(new_note)
-        );
-
-        //结束判断
-        over over1(
-            .clk(clk), 
-            .duration(duration), 
-            .co(co), 
-            .out(song_done),
-            .reset(reset)
-        );
-
-        //song \_ rom
-        song_rom songs(
-            .clk(clk), 
-            .dout({note,duration}), 
-            .addr({song,q})
-        );
-    endmodule
-                \end{lstlisting}
+                \lstinputlisting[
+                    language  =   Verilog,
+                    title     =   {song \_ reader顶层代码}
+                ]{src/song_reader.v}
 
                 系统复位后一直在RESET状态等待mcu模块控制信号输入，当mcu模块发出播放命令(play为高电平)时，进入NEW \_ NOTE状态输出new \_ note脉冲要求note \_ player模块播放音符;然后进入 WAIT状态等待，当note \_ player模块播放完音符时，会发出note \_ done脉冲信号索取下一音符，note \_ done脉冲信号一方面让地址计数器递增，并从 song \_ rom 取出一个新的音符，另一方面让控制器进入NEW \_ NOTE状态，输出new \_ note脉冲通知 note \_ player模块有新的音符需要播放。当note \_ done有效，需要两个时钟周期才能从song \_ rom中读取下一个音符信息。因此新音符有效标记信号new \_ note也应在新音符数据输出后有效，其时序关系如图6.49所示。所以在流程图中插入NEXT \_ NOTE状态，目的是延迟一个时钟周期输出信号，以配合song \_ rom的读取要求。
 
@@ -303,57 +149,11 @@
                 \end{figure}
 
                 根据原理框图设计出song \_ reader控制器代码如下：
-                \begin{lstlisting}[name = ]
-    module song_reader_controller (
-        clk, 
-        reset, 
-        play, 
-        note_done, 
-        new_note
-    );
-        input clk, reset, play, note_done;
-        output reg new_note;
-        parameter RESET = 0, NEW_NOTE = 1, WAIT = 2, NEXT_NOTE = 3;
-        reg [1:0] state, nextstate;
-
-        //状态寄存器
-        always @(posedge clk ) begin
-            if(reset) state = RESET;
-            else state = nextstate;
-        end
-
-        //下一状态和输出
-        always @(*) begin
-            new_note = 0;
-            case(state)
-                RESET:
-                    begin
-                        if(play) nextstate = NEW_NOTE;
-                        else nextstate = RESET;
-                    end
-                NEW_NOTE:
-                    begin
-                    new_note = 1;
-                    nextstate = WAIT; 
-                    end
-                WAIT:
-                    begin
-                        if(play) 
-                            begin
-                                if(note_done) nextstate = NEXT_NOTE;
-                                else nextstate = WAIT;
-                            end
-                        else nextstate = RESET;
-                    end
-                NEXT_NOTE:
-                    begin
-                        nextstate = NEW_NOTE;
-                    end
-                default: nextstate = RESET;
-            endcase
-        end
-    endmodule
-                \end{lstlisting}
+                \lstinputlisting[
+                    language  =   Verilog,
+                    title     =   {song \_ reader控制器代码}
+                ]{src/song_reader_controller.v}
+               
             \subsubsection{音符播放模块note \_ player的设计}
 
                 音符播放模块note \_ player是本实验的核心模块，它主要任务包括以下几方面。
@@ -388,78 +188,13 @@
                     \end{tabular}
                 \end{table}
 
-                根据原理框图设计出note \_ player控制器代码如下：
-                \begin{lstlisting}[name = note _ player控制器代码]
-    module note_player (
-        clk,                //系统时钟信号，外接sys \_ clk
-        reset,              //复位信号，高电平有效，外接mcu模块的reset \_ play
-        play_enable,        //来自mcu模块的play信号，高电平表示播放
-        note_to_load,       //来自song\_ reader模块的音符标记note，表示需播放的音符
-        duration_to_load,   //来自 song \_ reader模块的音符持续时间duration，表示需播放音符的音长
-        load_new_note,      //来自 song\_ reader模块的new\_note信号，一个时钟周期宽度的高电平脉冲，表示新的音符需播放
-        note_done,          //给song\_ reader模块的应答信号，一个时钟周期宽度的高电平脉冲，表示音符播放完毕
-        sampling_pulse,     //来自同步化电路模块的ready信号，频率48kHz，一个时钟周期宽度的高电平脉冲，表示索取新的正弦样品
-        beat,               //定时基准信号，频率为48Hz脉冲，一个时钟周期宽度的高电平脉冲
-        sample,             //正弦样品输出
-        sample_ready        //正弦成功输出信号
-    );
-        input clk, reset, play_enable, load_new_note,sampling_pulse,beat;
-        input [5:0] note_to_load, duration_to_load;
-        output note_done, sample_ready;
-        output [15:0] sample;
-        wire load;                      //读取新的音符
-        wire [5:0] q;                   //FreqROM地址输入
-        wire [19:0] dout;               //FreqROM读取的相位增量
-        wire timer_clear,timer_done;    //清零信号与定时结束标志
-
-        //D触发器
-        dffre #(.n(6)) note_dffre(
-            .d(note_to_load),
-            .en(load),
-            .r(~play_enable||reset),
-            .clk(clk),
-            .q(q)
-        );
-
-        //FreqROM
-        frequency_rom FreqROM(
-            .clk(clk),
-            .dout(dout),
-            .addr(q)
-        );
-
-        //DDS
-        dds note_dds(
-            .clk(clk),
-            .reset(~play_enable||reset),
-            .k({2'b00,dout}),
-            .sampling_pulse(sampling_pulse),
-            .new_sample_ready(sample_ready),
-            .sample(sample)
-        );
-
-        //控制器
-        note_player_controller note_ctrl(
-            .clk(clk),
-            .reset(reset),
-            .play_enable(play_enable),
-            .load_new_note(load_new_note),
-            .load(load),
-            .note_done(note_done),
-            .timer_clear(timer_clear),
-            .timer_done(timer_done)
-        );
-
-        //音符节拍定时器
-        timer note_counter(
-            .clk(clk),
-            .r(timer_clear),
-            .en(beat),
-            .n(duration_to_load),
-            .done(timer_done)
-        );
-    endmodule
-                \end{lstlisting}
+                根据原理框图设计出note \_ player顶层代码如下：
+                \lstinputlisting[
+                    language  =   Verilog,
+                    title     =   {note \_ player顶层代码}
+                ]{src/note_player.v}
+               
+                
 
                 note \_ player控制器负责与song \_ reader模块接口，读取音符信息，并根据音符信息从Frequency ROM中读取相应相位增量k送给DDS子模块。另外，note \_ player控制器还需要控制音符播放时间。note \_ player控制器的算法流程如图6.51所示。在复位或未播放时，控制器处于RESET状态或PLAY状态，由于此时高电平reset或低电平play \_ enable都使图6.35中的D型寄存器清0，进而使k为0，不会输出正弦样品。当play \_ enable为高电平，系统进入音符播放PLAY状态，当一个音符播放结束时，控制器进入DONE状态，置位done \_ with \_ note，向 song \_ reader模块索取新的音符，此时song \_ reader模块输出一个new \_ note脉冲信号使控制器进入LOAD状态，读取新的音符，然后进入 PLAY状态播放下一个音符。
 
@@ -473,73 +208,10 @@
                 \end{figure}
                 
                 根据原理框图设计出note \_ player控制器代码如下：
-                \begin{lstlisting}[name = note _ player控制器代码]
-    module note_player_controller (
-        clk,
-        reset,
-        play_enable,
-        load_new_note,
-        load,
-        note_done,
-        timer_clear,
-        timer_done
-    );
-        input clk, reset, play_enable, timer_done, load_new_note;
-        output reg load,timer_clear,note_done;
-        parameter RESET = 0, WAIT = 1, DONE = 2, LOAD = 3;
-        reg [1:0] state, nextstate;
-        //状态
-        always @(posedge clk ) begin
-            if(reset) state = RESET;
-            else state = nextstate;
-        end
-
-        //下一状态和输出
-        always @(*) begin
-            load = 0; timer_clear = 0; note_done = 0;
-            case(state)
-                RESET:
-                    begin
-                        timer_clear = 1;
-                        load = 0;
-                        note_done = 0;
-                        nextstate = WAIT;
-                    end
-                WAIT:
-                    begin
-                        timer_clear = 0;
-                        load = 0;
-                        note_done = 0;
-                        if(play_enable)
-                            begin
-                                if(timer_done) nextstate = DONE;
-                                else
-                                    begin
-                                        if(load_new_note) nextstate = LOAD;
-                                        else nextstate = WAIT;
-                                    end
-                            end
-                        else nextstate = RESET;
-                    end
-                DONE:
-                    begin
-                        timer_clear = 1;
-                        load = 0;
-                        note_done = 1;
-                        nextstate = WAIT;
-                    end
-                LOAD:
-                    begin
-                        timer_clear = 1;
-                        load = 1;
-                        note_done = 0;
-                        nextstate = WAIT;
-                    end
-                default: nextstate = RESET;
-            endcase
-        end
-    endmodule
-                \end{lstlisting}    
+                \lstinputlisting[
+                    language  =   Verilog,
+                    title     =   {note \_ player控制器代码}
+                ]{src/note_player_controller.v}
             \subsubsection{同步化电路}
 
                 由于音频编解码接口模块和其他模块采用不同的时钟，因此两者之间的控制及应答信号须进行同步化处理。
@@ -552,26 +224,11 @@
                 \end{figure}
 
                 同步化电路代码如下：
-                \begin{lstlisting}[name = 同步化电路代码]
-module synchro (
-    clk,
-    in,
-    out
-);
-    input clk, in;
-    output out;
-
-    reg q1,q2;
-
-    //非阻塞赋值
-    always @(posedge clk ) begin
-        q1 <= in;
-        q2 <= q1;
-    end
-
-    assign out = q1 && (~q2);
-endmodule
-                \end{lstlisting}
+                \lstinputlisting[
+                    language  =   Verilog,
+                    title     =   {同步化电路代码}
+                ]{src/synchro.v}
+            
             \subsubsection{时钟管理模块(DCM)}
         
                 IP内核时钟管理模块的输入时钟 clk频率为100MHz，产生100MHz的系统时钟和12.50MHz的音频时钟。
