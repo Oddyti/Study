@@ -38,7 +38,7 @@ sum=0;
 for i=1:1:5000
 sum=sum+(i.*pi./(10000))./sin(i.*pi./10000).*cos(i.*n.*pi./(5000));
 end
-h=1/10000+sum;
+h=(1/5000).*(1./2 + sum);
 end
 
 function Hd = Hdw(w,T)
