@@ -1,4 +1,4 @@
-% 重建后的FIR Hr'(jw)
+% 重建后的 Hr'(jw)
 function H = Hrw(w,T)
     sum = 0;
     N =5000;
