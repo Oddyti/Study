@@ -12,7 +12,7 @@ How = Hw(w,T);              % 零阶保持频谱
 H1w = Hw2(w,T);             % 理想的矫正滤波器Hr(jw)
 H1w_new = Hrw(w,T);         % 重建后的矫正滤波器频谱Hr'(jw)
 Hjw = How .* H1w_new;       % 联合H(jw)，重建后的联合滤波
-x1w = y .* How ./ T;        % 未矫正频域直接D/A输出  
+x1w = y .* How ;        % 未矫正频域直接D/A输出  
 x2w=y.*Hjw./T;              % xw重建矫正滤波器后的频域波形 
 
 figure(1);
@@ -27,6 +27,7 @@ figure(2);
 plot(w,y,'b','linewidth',0.5);axis([-5 5 -0.1 1.2]);hold on;
 plot(w,x1w,'k','linewidth',0.5);axis([-5 5 -0.1 1.2]);hold on;
 plot(w,x2w,'r','linewidth',0.5);axis([-5 5 -0.1 1.2]);hold on;
+plot(w,How,'linewidth',0.5);axis([-5 5 -0.1 1.2]);hold on;
 title('对比','fontsize',18);
 l1 = legend('原信号','未矫正','矫正后');
 set(l1,'FontSize',18);
