@@ -62,11 +62,11 @@
             
             根据采样序列与原信号的关系有：
             
-            $$H_{r}\left(e^{j v}\right)=H_{r}\left(j \frac{\omega}{T}\right)=\frac{\omega / 2}{\sin (\omega / 2)}$$
+            $$H_{r}\left(e^{j \omega}\right)=H_{r}\left(j \frac{\omega}{T}\right)=\frac{\omega / 2}{\sin (\omega / 2)}$$
 
             对$H_{r}\left(e^{j \omega}\right)$进行等间隔采样，得：
             
-            $$H_{r}(m)=\left.H_{r}\left(e^{j v}\right)\right|_{\omega = \frac{2 \pi m}{N}}=\frac{\pi m / N}{\sin (\pi m / N)}$$
+            $$H_{r}(m)=\left.H_{r}\left(e^{j \omega}\right)\right|_{\omega = \frac{2 \pi m}{N}}=\frac{\pi m / N}{\sin (\pi m / N)}$$
                     
             假设是对$H_{r}\left(e^{j \omega}\right)$在一个周期内采样$(2 \mathrm{M}+1)$个点，可得：
             
@@ -74,7 +74,7 @@
             
             若假设采样点很多，即$2 \mathrm{M}>>1$，利用$H_r\left(e^{j \omega}\right)$的周期性，可得：
             
-            $$h_{r}[n]=\frac{1}{2 M} \sum_{m=M}^{M} \frac{m \pi / 2 M}{\sin (m \pi / 2 M)} e^{j m n / M}$$
+            $$h_{r}[n]=\frac{1}{2 M} \sum_{m=-M}^{M} \frac{m \pi / 2 M}{\sin (m \pi / 2 M)} e^{j m n / M}$$
             
             当$m=O$时，$h_r[n]$化简为：
             
@@ -172,7 +172,7 @@
     \lstinputlisting[
         language       =   Matlab,
         title     =   {主程序}
-    ]{src/test.m}
+    ]{src/Main.m}
 
     \lstinputlisting[
         language       =   Matlab,
