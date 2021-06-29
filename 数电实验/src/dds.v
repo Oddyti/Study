@@ -1,5 +1,10 @@
 module dds (
-    clk, reset, k, sampling_pulse, new_sample_ready, sample
+    clk, 
+    reset, 
+    k, 
+    sampling_pulse, 
+    new_sample_ready, 
+    sample
 );
     input clk, reset,sampling_pulse;
     input [21:0] k;
