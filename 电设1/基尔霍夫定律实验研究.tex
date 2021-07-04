@@ -1,0 +1,149 @@
+\documentclass{../source/Experiment}
+
+\major{信息工程}
+\name{姚桂涛}
+\title{基尔霍夫定律实验研究}
+\stuid{3190105597}
+\college{信息与电子工程学院}
+\date{\today}
+\lab{东4-216}
+\course{电子电路设计实验}
+\instructor{李锡华、施红军、叶险峰}
+\grades{}
+\expname{基尔霍夫定律实验研究}
+\exptype{研究实验}
+\partner{杜秉哲}
+
+\begin{document}
+    \makecover
+    \makeheader
+
+    \section{实验目的}
+    验证基尔霍夫电流、电压定律的正确性，加深对基尔霍夫定律的理解。
+    \section{实验任务和要求}
+        \begin{enumerate}
+            \item 按电路图连接好电路。
+            \item 先理论计算出3个支路的电流值$I_1$、$I_2$和$I_3$，然后用电流表分别测量支路电流$I_1$、$I_2$、$I_3$，验证基尔霍夫电流定律是否成立。
+            \item 先理论计算出表2所列各节点之间的电压，然后用数字万用表分别测量各节点间的电压值，并验证基尔霍夫电压定律是否成立。
+            \item 再用二极管$D1$代替$R5$，重复实验。 
+        \end{enumerate}
+    \section{实验方案设计与实验参数计算}
+        \subsection{完整的实验电路}
+            \begin{figure}[htbp]
+                \begin{center}
+                    \includegraphics{pic1.png}
+                    \caption{验证验证基尔霍夫定律的实验电路}
+                \end{center}
+            \end{figure}
+        \subsection{实验方案总体设计}
+            \begin{enumerate}
+                \item 利用KCl法计算三个支路的电流值。利用KVL法计算节点间的电压值。
+                \item 接入电阻$R_5$验证基尔霍夫定律是否成立。
+                \item 接入二极管$D_1$验证在非线性电路中基尔霍夫定律是否成立。
+            \end{enumerate}
+    \section{主要仪器设备}
+            万用表，电压源，电阻若干，一个1N4007二极管。
+    \section{实验步骤、实验调试过程、实验数据记录}
+        \subsection{实验步骤}
+            \begin{enumerate}
+                \item 按电路图连接好电路。并将$R_5$接入支路中。
+                \item 理论计算出3个支路的电流值和节点间的电压值，记入表中。
+                \item 用电流表分别测量支路电流记入表中，用数字万用表分别测量各节点间的电压值，记入表中。
+                \item 再用二极管$D_1$代替$R_5$，重复实验。 
+            \end{enumerate}
+        \subsection{实验调试过程}
+            \begin{enumerate}
+                \item 设置电压源为$6.0V$和$12.0V$并接入$U_1$和$U_2$。
+                \item 将$R_5$接入CD，测量支路电流和节点电压。
+                \item 将$D_1$接入CD，测量支路电流和节点电压。
+            \end{enumerate}
+        \subsection{实验数据记录}
+            \begin{enumerate}
+                \item CD间接入$R_5$时。
+                \begin{table}[htbp]
+                    \begin{center}
+                    \caption{各支路电流测量值}
+                    \begin{tabular}{|c|c|c|c|}
+                    \hline
+                        & $I_{1}(mA)$ & $I_{2}(mA)$ & $I_{3}(mA)$ \\
+                    \hline
+                    计算值 & 1.93 & 5.99 & 7.92 \\
+                    \hline
+                    测量值 & 1.839 & 6.12 & 8.07 \\
+                    \hline
+                    \end{tabular} 
+                    \end{center}
+                \end{table}
+                \begin{table}[htbp]
+                    \begin{center}
+                    \caption{各节点间电压测量值}
+                    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+                        \hline
+                            & $U_{1}(V)$ & $U_{2}(V)$ & $U_{FA}(V)$ & $U_{AB}(V)$ & $U_{AD}(V)$ & $U_{CD}(V)$ & $U_{DE}(V)$ \\
+                        \hline
+                        计算值 & 6&12 & 0.984 & -5.99 & 4.039 & -1.977 & 0.984 \\
+                        \hline
+                        测量值 & 5.98 & 11.99 & 1.033 & -5.98 & 3.96 & -2.03 & 0.985 \\
+                        \hline
+                        \end{tabular}
+                    \end{center}
+                \end{table}
+                \item CD间接入$D_1$时。
+                \begin{table}[htbp]
+                    \begin{center}
+                    \caption{各支路电流测量值}
+                    \begin{tabular}{|c|c|c|c|}
+                    \hline
+                        & $I_{1}(mA)$ & $I_{2}(mA)$ & $I_{3}(mA)$ \\
+                    \hline
+                    计算值 & 3.92 & 0 & 3.92 \\
+                    \hline
+                    测量值 & 3.98 & 0 & 3.98 \\
+                    \hline
+                    \end{tabular} 
+                    \end{center}
+                \end{table}
+                \begin{table}[htbp]
+                    \begin{center}
+                    \caption{各节点间电压测量值}
+                    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+                        \hline
+                            & $U_{1}(V)$ & $U_{2}(V)$ & $U_{FA}(V)$ & $U_{AB}(V)$ & $U_{AD}(V)$ & $U_{CD}(V)$ & $U_{DE}(V)$ \\
+                        \hline
+                        计算值 & 6 & 12 & 2 & 0 & 2 & -10 & 2 \\
+                        \hline
+                        测量值 & 5.98 & 11.99 & 2.06 & 0 & 1.944 & -10.04 & 1.966 \\
+                        \hline
+                        \end{tabular}
+                    \end{center}
+                \end{table}
+            \end{enumerate}
+    \section{实验结果和分析处理}
+        \subsection{数据分析}
+            \begin{enumerate}
+                \item KCL分析：
+                \\ 接入$R_5$: $I_1 = 1.839mA, I_2 = 6.12mA, I_3 = 8.07mA; \, I_1 + I_2 = 7.959mA \approx I_3 = 8.07mA$
+                \\ 接入$D_1$: $I_1 = 3.92mA, I_2 = 0mA, I_3 = 3.92mA; \, I_1 + I_2 = 3.92mA = I_3 = 3.92mA$
+                \item KVL分析
+                \par 接入$R_5$: 
+                \par $U_{FA} + U_{AD} + U_{DE} = 5.978V \approx U_1 = 5.98V$
+                \\ $U_{BA} + U_{AD} + U_{DC} = 11.97V \approx U_2 = 11.99V$
+                \par 接入$D_1$: 
+                \par $U_{FA} + U_{AD} + U_{DE} = 5.97V \approx U_1 = 5.98V$
+                \\ $U_{BA} + U_{AD} + U_{DC} = 11.984V \approx U_2 = 11.99V$
+            \end{enumerate}
+        \subsection{实验结果}
+            由实验结果，在误差允许范围内，支路电流和回路电压符合基尔霍夫定律。
+    \section{讨论、心得}
+            通过本次实验，我对基尔霍夫定律有了更加直观的认识。
+    \section{思考题}
+            \begin{enumerate}
+                \item 如果设定不同的电压与电流参考方向，基尔霍夫定律是否仍然成立？
+                \par 依然成立。
+                \item 如果电路中含有非线性器件，基尔霍夫定律是否仍然成立？（在图1所示电路中，可选择将二极管1N4007替换电阻R5连入电路，进行实验验证。） 
+                \par 由实验结果分析可知，电路中含有非线性器件时，基尔霍夫定律依然成立。
+            \end{enumerate}
+\end{document}
+
+
+
