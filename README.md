@@ -6,7 +6,7 @@
 有些报告时比较水的，有些也不能保证正确。参考以下就好。
 ### 模板内容以及一些技巧更新（实验报告模板：Experiment）
 
-+ 新增了角度命令可以打出°
+1. 新增了角度命令可以打出°
     ```latex
     % 定义°为\degree 不需要$, \deg 需要$
     \def\deg{^{\circ}}
@@ -18,7 +18,7 @@
     ```
     >90°    29.5°
     
-+ 新增了代码插入，自定义了代码主题
+2. 新增了代码插入，自定义了代码主题
     ```latex
     \lstset{
     basicstyle          =   \small\fontspec{Hack},          % 基本代码风格
@@ -76,7 +76,7 @@
 
     ![image-20210705225841881](https://i.loli.net/2021/07/05/SqKw3WzHsAuknDd.png)
 
-+ 如何自定义caption中编号和文本之间的分隔（用于只想让caption有一个编号时）
+3. 如何自定义caption中编号和文本之间的分隔（用于只想让caption有一个编号时）
     ```latex
     %需要用到宏包caption
     \usepackage{caption}
@@ -91,7 +91,7 @@
     修改后：
     
     <img src="https://i.loli.net/2021/07/05/Oo7GLCt3YkD8MEU.png" alt="image-20210705231045435" style="zoom:80%;" />
-+ 重新开始标题/图片编号（用于几个实验报告合一起时，想要重新开始编号）
+4. 重新开始标题/图片编号（用于几个实验报告合一起时，想要重新开始编号）
     ```latex
     %标题
     \setcounter{section}{0}
@@ -109,7 +109,7 @@
         \subsection{第一}
     ```
     <img src="https://i.loli.net/2021/07/05/qmDJ9SUBu2rEOaA.png" alt="image-20210705231405831" style="zoom: 50%;" />
-+ 按页面宽度缩放表格（解决表格行/列太多写不下问题）
+5. 按页面宽度缩放表格（解决表格行/列太多写不下问题）
     ```latex
     \resizebox{\textwidth}{!}{这里面放你的tabular}
     ```
