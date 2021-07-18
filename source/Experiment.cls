@@ -52,6 +52,9 @@
   \geometry{top=1in,bottom=1in,left=1in,right=1in}
   % 目录深度
   \setcounter{secnumdepth}{3}
+  % caption距离
+  \setlength{\abovecaptionskip}{4pt}
+  \setlength{\belowcaptionskip}{4pt}
 % 
 
 % 多级标题
@@ -171,8 +174,8 @@
     \begin{table}[!htbp]
       \centering
       \begin{tabular*}{\linewidth}{llllll}
-        课程名称： & \zjuu[200pt]\@course   & 指导老师： & \zjuu[50pt]\@instructor   & 成绩：        \zjuu[50pt]\@grades \\
-        实验名称： & \zjuu[200pt]\@expname & 实验类型： &\zjuu[50pt]\@exptype & 同组学生姓名： \zjuu[50pt]\@partner
+        课程名称： & \zjuu[140pt]\@course   & 指导老师： & \zjuu[70pt]\@instructor   & 成绩：        \zjuu[70pt]\@grades \\
+        实验名称： & \zjuu[140pt]\@expname & 实验类型： &\zjuu[70pt]\@exptype & 同组学生姓名： \zjuu[70pt]\@partner
       \end{tabular*}
     \end{table}
     \thispagestyle{empty}
