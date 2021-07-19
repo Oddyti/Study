@@ -208,7 +208,7 @@
           \bfseries{指导老师：} & \@instructor  \\ \cline{2-2}
         \end{tabular}
       \end{center}
-      \vspace{2cm}
+      \vspace{3cm}
       \Large{\@date}
     \end{center}
     \thispagestyle{empty}
