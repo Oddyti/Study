@@ -47,9 +47,9 @@
 
 %页面参数
 	%页边距
-	\geometry{top=1in,bottom=1in,left=1in,right=1in}
+	\geometry{top=0.8in,bottom=1in,left=0.5in,right=0.5in}
 	%行距
-	\linespread{1.5}
+	\linespread{1.2}
 	%目录深度
 	\setcounter{secnumdepth}{3}
 %
