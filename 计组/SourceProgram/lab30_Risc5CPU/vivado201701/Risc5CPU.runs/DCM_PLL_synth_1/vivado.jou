@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.1 (64-bit)
+# SW Build 1846317 on Fri Apr 14 18:55:03 MDT 2017
+# IP Build 1846188 on Fri Apr 14 20:52:08 MDT 2017
+# Start of session at: Fri Sep 27 14:25:21 2019
+# Process ID: 3880
+# Current directory: E:/lab30_Risc5CPU/vivado/Risc5CPU.runs/DCM_PLL_synth_1
+# Command line: vivado.exe -log DCM_PLL.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source DCM_PLL.tcl
+# Log file: E:/lab30_Risc5CPU/vivado/Risc5CPU.runs/DCM_PLL_synth_1/DCM_PLL.vds
+# Journal file: E:/lab30_Risc5CPU/vivado/Risc5CPU.runs/DCM_PLL_synth_1\vivado.jou
+#-----------------------------------------------------------
+source DCM_PLL.tcl -notrace
