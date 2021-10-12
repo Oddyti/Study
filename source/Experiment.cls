@@ -162,11 +162,11 @@
       \begin{minipage}{.3\linewidth}
         \raggedleft
         \begin{tabular*}{.8\linewidth}{ll}
-          专业： & \zjuu[70pt]\@major   \\
-          姓名： & \zjuu[70pt]\@name    \\
-          学号： & \zjuu[70pt]\@stuid   \\
-          日期： & \zjuu[70pt]\@date \\
-          地点： & \zjuu[70pt]\@lab
+          专业： & \zjuu[85pt]\@major   \\
+          姓名： & \zjuu[85pt]\@name    \\
+          学号： & \zjuu[85pt]\@stuid   \\
+          日期： & \zjuu[85pt]\@date \\
+          地点： & \zjuu[85pt]\@lab
         \end{tabular*}
       \end{minipage}
     \end{figure}
