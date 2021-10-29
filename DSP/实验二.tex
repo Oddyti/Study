@@ -1,0 +1,66 @@
+\documentclass{../source/Experiment}
+
+\major{信息工程}
+\name{姚桂涛}
+\title{DFT/FFT的应用之一——确定性信号谱分析}
+\stuid{3190105597}
+\college{信息与电子工程学院}
+\date{\today}
+\lab{——}
+\course{数字信号处理}
+\instructor{徐元欣}
+\grades{}
+\expname{DFT/FFT的应用之一——确定性信号谱分析}
+\exptype{验证}
+\partner{——}
+\begin{document}
+    \makeheader
+    \section{实验目的和要求}
+    谱分析即求信号的频谱。本实验采用DFT/FFT技术对周期性信号进行谱分析。通过实验，了解用X(k)近似地表示频谱$\rm  X(ej\omega)$带来的栅栏效应、混叠现象和频谱泄漏，了解如何正确地选择参数（抽样间隔T、抽样点数N）。
+
+    \section{实验内容和步骤}
+    2-1 \,  \,  \, 选用最简单的周期信号：单频正弦信号、频率f=50赫兹，进行谱分析。
+
+    2-2 \,  \,  \, 谱分析参数可以从下表中任选一组（也可自定）。对各组参数时的序列，计算：一个正弦周期是否对应整数个抽样间隔？观察区间是否对应整数个正弦周期？
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|l|c|}
+        \hline
+        \textbf{信号频率f（赫兹）} & \textbf{谱分析参数} & \multicolumn{1}{c|}{\textbf{抽样间隔T}} & \textbf{截断长度N} \\
+        \textbf{}          & \textbf{}      & \multicolumn{1}{c|}{（秒）}            & （抽样个数）         \\ \hline
+        50                 & 第一组参数          & 0.000625                            & 32             \\ \hline
+        50                 & 第二组参数          & 0.005                               & 32             \\ \hline
+        50                 & 第三组参数          & 0.0046875                           & 32             \\ \hline
+        50                 & 第四组参数          & 0.004                               & 32             \\ \hline
+        50                 & 第五组参数          & 0.0025                              & 16             \\ \hline
+        \end{tabular}
+    \end{table}
+    2-3 \,  \,  \, 对以上几个正弦序列，依次进行以下过程。
+
+    2-3-1 \, 观察并记录一个正弦序列的图形（时域）、频谱（幅度谱、频谱实 部、频谱虚部）形状、幅度谱的第一个峰的坐标（U，V）。
+
+    2-3-2 \, 分析抽样间隔T、截断长度N（抽样个数）对谱分析结果的影响；
+    2-3-3 \, 思考X(k)与$\rm  X(ej\omega)$的关系；
+
+    2-3-4 \, 讨论用X(k)近似表示$\rm  X(ej\omega)$时的栅栏效应、混叠现象、频谱泄漏。
+
+
+    \section{主要仪器设备}
+    
+    MATLAB编程。
+
+    \section{操作方法和实验步骤}
+
+    （参见“二、实验内容和步骤”）
+
+    \section{实验数据记录和处理}
+    
+        MATLAB程序清单
+        \subsection{各序列主函数}
+            
+    \section{实验结果与分析}
+        \subsection{序列各图像特征与解释}
+
+            
+ 
+\end{document}

@@ -92,12 +92,46 @@
             ]{src/csa.v}
         \section{仿真分析}
             \subsection{4位加法器仿真分析}
-
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = \textwidth]{sim4_1}
+                \caption{4位加法器仿真分析整体图}
+            \end{figure}
+            
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 0.6\textwidth]{sim4_2}
+                \caption{4位加法器仿真分析局部图}
+            \end{figure}
+            如图所示：当加数a = 3, b = 2, 进位ci = 0时，和sum = 5, 进位输出cout = 0。符合设计预期。同时，其余测试数据经检验也符合设计预期，此不在一一赘述。
             \subsection{32位进位选择器加法器仿真分析}
-        
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 1\textwidth]{sim32_1}
+                \caption{32位加法器仿真分析整体图}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 0.6\textwidth]{sim32_2}
+                \caption{32位加法器仿真分析局部图1}
+            \end{figure}
+            如图所示：当加数a = 0xa0022475, b = 0x85561c86, 进位ci = 0时，和sum = 0x255740fb, 进位输出cout = 1。符合设计预期。
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 0.6\textwidth]{sim32_3}
+                \caption{32位加法器仿真分析局部图2}
+            \end{figure}
+            如图所示：当加数a = 0x4bbc3b1e, b = 0x5aa64395, 进位ci = 0时，和sum = 0xa6627eb3, 进位输出cout = 0。符合设计预期。同时，其余测试数据经检验也符合设计预期，此不在一一赘述。
         \section{思考题}
             \begin{enumerate}
                 \item 为什么要进行时序仿真？
+                
+                仿真过程是正确实现设计的关键环节，用来验证设计者的设计思想是否正确，及在设计实现过程中各种分布参数引入后，其设计的功能是否依然正确无误。
+                而时序仿真使用布局布线后器件给出的模块和连线的延时信息， 在最坏的情况下对电路的行为作出实际地估价。可以比较真实地反映出器件的延时情况
+
                 \item 采用流水线技术有什么优缺点？
+                
+                优点：流水线技术是将操作执行工作量分成若干个时间上均衡的操作段，从流水线的起点连续地输入，流水线的各操作段以重叠方式执行。这使得操作执行速度只与流水线输入的速度有关，而与处理所需的时间无关。这样，在理想的流水操作状态下，其运行效率很高。
+                缺点：流水线会增大资源的使用。
             \end{enumerate}
 \end{document}
