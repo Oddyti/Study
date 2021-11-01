@@ -1,11 +1,10 @@
-\ProvidesClass{../source/Experiment}
 \LoadClass{ctexart}
 
 %宏包
 \RequirePackage{xeCJK}
-\RequirePackage{CJKnumb}
 \RequirePackage{graphicx}
 \RequirePackage{geometry}
+\RequirePackage{zhnumber}
 \RequirePackage{titlesec}
 \RequirePackage{fancyhdr}
 \RequirePackage{enumitem}
@@ -49,7 +48,7 @@
   % 行距
   \linespread{1.2}
   % 页边距
-  \geometry{top=1in,bottom=1in,left=1in,right=1in}
+  \geometry{top=1in,bottom=1in,left=0.75in,right=0.75in}
   % 目录深度
   \setcounter{secnumdepth}{3}
   % caption距离
@@ -59,7 +58,7 @@
 
 % 多级标题
   % 命名格式
-  \renewcommand\thesection{\CJKnumber{\arabic{section}}、}
+  \renewcommand\thesection{\zhnum{section}、}
   \renewcommand\thesubsection{\arabic{subsection}.}
   \renewcommand\thesubsubsection{\thesubsection\arabic{subsubsection}}
   % 序号格式

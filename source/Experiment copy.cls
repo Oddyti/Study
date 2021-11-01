@@ -1,9 +1,9 @@
-\ProvidesClass{../source/Experiment1}
+\ProvidesClass{../source/Experiment}
 \LoadClass{ctexart}
 
 %宏包
 \RequirePackage{xeCJK}
-\RequirePackage{CJKnumb}
+\RequirePackage{zhnumber}
 \RequirePackage{graphicx}
 \RequirePackage{geometry}
 \RequirePackage{titlesec}
@@ -35,8 +35,6 @@
   \newcommand\name[1]{\def\@name{#1}}
   \newcommand\stuid[1]{\def\@stuid{#1}}
   \newcommand\college[1]{\def\@college{#1}}
-  \newcommand\department[1]{\def\@department{#1}}
-
   \renewcommand\date[1]{\def\@date{#1}}
   \newcommand\lab[1]{\def\@lab{#1}}
   \newcommand\course[1]{\def\@course{#1}}
@@ -51,14 +49,17 @@
   % 行距
   \linespread{1.2}
   % 页边距
-  \geometry{top=1in,bottom=1in,left=1in,right=1in}
+  \geometry{top=1in,bottom=1in,left=0.75in,right=0.75in}
   % 目录深度
   \setcounter{secnumdepth}{3}
+  % caption距离
+  \setlength{\abovecaptionskip}{4pt}
+  \setlength{\belowcaptionskip}{4pt}
 % 
 
 % 多级标题
   % 命名格式
-  \renewcommand\thesection{\CJKnumber{\arabic{section}}、}
+  \renewcommand\thesection{\zhnum{section}、}
   \renewcommand\thesubsection{\arabic{subsection}.}
   \renewcommand\thesubsubsection{\thesubsection\arabic{subsubsection}}
   % 序号格式
@@ -145,7 +146,10 @@
 }
 
 % 页眉
-  \pagestyle{empty}
+  \pagestyle{fancy}
+  \lhead{\small{实验名称：\@expname}}
+  \chead{\small{姓名：\@name}}
+  \rhead{\small{学号：\@stuid}}
 % 
 
 % 首页头部
@@ -158,15 +162,22 @@
       \begin{minipage}{.3\linewidth}
         \raggedleft
         \begin{tabular*}{.8\linewidth}{ll}
-          专业： & \zjuu[70pt]\@major   \\
-          姓名： & \zjuu[70pt]\@name    \\
-          学号： & \zjuu[70pt]\@stuid   \\
-          日期： & \zjuu[70pt]\@date \\
-          地点： & \zjuu[70pt]\@lab
+          专业： & \zjuu[85pt]\@major   \\
+          姓名： & \zjuu[85pt]\@name    \\
+          学号： & \zjuu[85pt]\@stuid   \\
+          日期： & \zjuu[85pt]\@date \\
+          地点： & \zjuu[85pt]\@lab
         \end{tabular*}
       \end{minipage}
     \end{figure}
 
+    \begin{table}[!htbp]
+      \centering
+      \begin{tabular*}{\linewidth}{llllll}
+        课程名称： & \zjuu[220pt]\@course   & 指导老师： & \zjuu[50pt]\@instructor   & 成绩：        \zjuu[30pt]\@grades \\
+        实验名称： & \zjuu[220pt]\@expname & 实验类型： &\zjuu[50pt]\@exptype & 同组学生姓名： \zjuu[30pt]\@partner
+      \end{tabular*}
+    \end{table}
     \thispagestyle{empty}
   }
 % 
@@ -180,23 +191,24 @@
       \vspace{1cm}
       \bfseries\huge{本科实验报告}\\
       \vspace{0.5cm}
-      \vspace{2cm}
+      \bfseries\Large{\@expname}
+      \vspace{2.95cm}
       \begin{center}
         \Large
         \linespread{2}
         \centering
         \renewcommand\arraystretch{1.6}
-        \begin{tabular}{p{3cm}c}
+        \begin{tabular}{p{3cm}p{6cm}}
           \bfseries{课程名称：} & \@course \\ \cline{2-2}
           \bfseries{姓\hphantom{两格}名：}     & \@name   \\ \cline{2-2}
           \bfseries{学\hphantom{两格}院：}     & \@college \\ \cline{2-2}
-          \bfseries{\hphantom{三格的}系：}     &\@department   \\ \cline{2-2}
+          % \bfseries{\hphantom{三格的}系：}     &   \\ \cline{2-2}
           \bfseries{专\hphantom{两格}业：}     & \@major  \\ \cline{2-2}
           \bfseries{学\hphantom{两格}号：}     & \@stuid  \\ \cline{2-2}
           \bfseries{指导老师：} & \@instructor  \\ \cline{2-2}
         \end{tabular}
       \end{center}
-      \vspace{1.5cm}
+      \vspace{3cm}
       \Large{\@date}
     \end{center}
     \thispagestyle{empty}

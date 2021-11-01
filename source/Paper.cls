@@ -2,7 +2,7 @@
 \LoadClass{ctexart}
 %宏包
 \RequirePackage{xeCJK}
-\RequirePackage{CJKnumb}
+\RequirePackage{zhnumber}
 \RequirePackage{graphicx}
 \RequirePackage{geometry}
 \RequirePackage{titlesec}
@@ -56,7 +56,7 @@
 
 %多级标题
 	%多级标题命名格式
-	\renewcommand\thesection{\CJKnumber{\arabic{section}}、}
+	\renewcommand\thesection{\zhnum{section}、}
 	\renewcommand\thesubsection{\arabic{subsection}.}
 	\renewcommand\thesubsubsection{\thesubsection\arabic{subsubsection}}
 	%多级标题字体
