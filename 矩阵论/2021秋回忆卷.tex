@@ -1,0 +1,91 @@
+\documentclass{../source/Paper}
+
+%关键信息输入
+\major{}
+\name{}
+\articletitle{}
+\stuid{}
+\college{}
+\date{\today}
+\course{}
+\instructor{}
+%摘要
+\Abstract{}
+%关键词
+\Keyword{}
+
+\pagestyle{plain}
+
+\begin{document}
+    \begin{center}
+        \bfseries\huge{2021秋矩阵论回忆卷}
+
+
+        \large{by\,Oddyti}
+    \end{center}
+    \section{}
+        \bfseries{1.}
+
+        (1) 证明：$tr(\boldsymbol{AB}) = tr(\boldsymbol{BA})$
+        
+        (2) 证明：若$\boldsymbol P^{-1} \boldsymbol A \boldsymbol P =  \boldsymbol B$，则$tr(\boldsymbol{A}) = tr(\boldsymbol{B}) = \sum \nolimits_{i = 1}^n \lambda_i$
+
+        \bfseries{2.}
+        若$\boldsymbol A^T = - \boldsymbol A$，证明$e^{\boldsymbol A}$为酉矩阵。
+    \section{}
+        $\boldsymbol A = \boldsymbol U \begin{bmatrix}
+            \boldsymbol {\sum} & \boldsymbol 0 \\ \boldsymbol 0 &  \boldsymbol 0
+        \end{bmatrix}V^H$，若$\boldsymbol a = \boldsymbol V \begin{bmatrix}
+            \boldsymbol {\sum}^{-1} & \boldsymbol 0 \\ \boldsymbol 0 &  \boldsymbol 0
+        \end{bmatrix}\boldsymbol U^H\boldsymbol b$，求证$||\boldsymbol A \boldsymbol a - \boldsymbol b||_2 \leq ||\boldsymbol A \boldsymbol x - \boldsymbol b||_2 $
+    \section{}
+        $$min f({\boldsymbol x}) \quad s.t. \quad g_i(\boldsymbol x) \leq 0 \, i = 0,1,2,...I ,\, \quad h_j(\boldsymbol x) = 0 \, j = 0,1,2,...J$$
+
+        \bfseries{1.} 混合外罚函数进行无约束，一个。
+
+        \bfseries{2.} 混合内罚函数进行无约束，两个。
+
+        \bfseries{3.} 混合拉格朗日函数进行无约束，一个。
+
+    \section{}
+        $\boldsymbol A$、$\boldsymbol B$为Hermitian矩阵，$\boldsymbol x \neq 0$。 
+
+        \bfseries{1.} Rayleigh商为$R(x) =\displaystyle  \frac{\boldsymbol x ^H \boldsymbol A \boldsymbol x}{\boldsymbol x^H \boldsymbol x}$，求$R(x)$的最大值以及对应的$\boldsymbol x$。
+
+        \bfseries{2.} 广义Rayleigh商为$R(x) = \displaystyle  \frac{\boldsymbol x ^H \boldsymbol A \boldsymbol x}{\boldsymbol x^H \boldsymbol B \boldsymbol x}$，求$R(x)$的最大值以及对应的$\boldsymbol x$。
+        
+    \section{}
+        \bfseries{1.} 证明：$d[tr(\boldsymbol X^T\boldsymbol X)] = 2tr(\boldsymbol X^Td\boldsymbol X)$
+
+        \bfseries{2.} 求$f(\boldsymbol x) = \boldsymbol a^T \boldsymbol x$与$f(\boldsymbol x) = \boldsymbol x^T \boldsymbol A \boldsymbol x$的Hessian矩阵。
+    
+    \section{}
+        $\boldsymbol A  = \begin{bmatrix}
+            -2 & 1 & 0 \\
+            -4 & 2 & 0 \\
+            1 & 0 & 1 
+        \end{bmatrix}$
+
+        \bfseries{1.} 求$\boldsymbol A  $的特征多项式
+
+        \bfseries{1.} 求$\boldsymbol {sinA}  $
+        
+        提示：$\boldsymbol {sinA}   = \sum _{n = 0}^{\infty} \displaystyle  \frac{(-1)^n \boldsymbol A^(2n-1)  }{(2n+1)!}$
+
+    \section{} 
+        \begin{center}
+            已知：$\boldsymbol y = \boldsymbol X \boldsymbol \beta + \boldsymbol \varepsilon ,\, E\{\boldsymbol \varepsilon \} = 0,\,E\{\boldsymbol \varepsilon ^H \boldsymbol \varepsilon \} = \sigma^2 \boldsymbol I$
+        \end{center}
+
+        现在设计：$\boldsymbol e = \boldsymbol A\boldsymbol y$满足$E\{\boldsymbol e - \boldsymbol \varepsilon\} = 0$使得$E\{(\boldsymbol e-\boldsymbol \varepsilon)^H(\boldsymbol e-\boldsymbol \varepsilon)\}$最小，请证明上述优化问题可以等价为：
+        $$min[tr(\boldsymbol A^T\boldsymbol A)-2tr(\boldsymbol A)] ,\quad s.t.\, \boldsymbol A\boldsymbol X = \boldsymbol O$$
+
+    \section{简答题} 
+
+    \bfseries{1.} 说明条件数的物理意义以及与奇异值的关系。
+
+    \bfseries{1.} 说明标准正交变换的过程以及与白（色）噪声的关系。
+
+    \bfseries{1.} 说明Tikhonov正则化与反正则化的目的。
+
+\end{document}
