@@ -1399,25 +1399,27 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
 
     l0:  // 00000   I-form
       {
-	IFormInst iform(inst);
-	op0 = iform.fields.rd;
-	op1 = iform.fields.rs1;
-	op2 = iform.immed();
-  unsigned funct3 = iform.fields.funct3;
-  if(funct3 == 0)  return instTable_.getEntry(InstId::lb);
-  if(funct3 == 1)  return instTable_.getEntry(InstId::lh);
-  if(funct3 == 2)  return instTable_.getEntry(InstId::lw);
-  if(funct3 == 3)  return instTable_.getEntry(InstId::ld);
-	if(funct3 == 4)  return instTable_.getEntry(InstId::lbu);
-	if(funct3 == 5)  return instTable_.getEntry(InstId::lhu);
-	if(funct3 == 6)  return instTable_.getEntry(InstId::lwu);
+        IFormInst iform(inst);
+        op0 = iform.fields.rd;
+        op1 = iform.fields.rs1;
+        op2 = iform.immed();
+        unsigned funct3 = iform.fields.funct3;
+        if(funct3 == 0)  return instTable_.getEntry(InstId::lb);
+        if(funct3 == 1)  return instTable_.getEntry(InstId::lh);
+        if(funct3 == 2)  return instTable_.getEntry(InstId::lw);
+        if(funct3 == 3)  return instTable_.getEntry(InstId::ld);
+        if(funct3 == 4)  return instTable_.getEntry(InstId::lbu);
+        if(funct3 == 5)  return instTable_.getEntry(InstId::lhu);
+        if(funct3 == 6)  return instTable_.getEntry(InstId::lwu);
 		  }
       return instTable_.getEntry(InstId::illegal);
 
     l5:  // 00101   U-form
       {
-        /* INSERT YOUR CODE HERE */
-
+        UFormInst uform(inst);
+        op0 = uform.bits.rd;
+        op1 = uform.bits.imm;
+        return instTable_.getEntry(InstId::auipc);
       }
       return instTable_.getEntry(InstId::illegal);
 
@@ -1426,48 +1428,81 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
 	      // For the store instructions, the stored register is op0, the
 	      // base-address register is op1 and the offset is op2.
   
-        /* INSERT YOUR CODE HERE */
-
+        SFormInst sform(inst);
+        op0 = sform.bits.rs2;
+        op1 = sform.bits.rs1;
+        op2 = sform.immed();
+        unsigned funct3 = sform.bits.funct3;
+        if(funct3 == 0)  return instTable_.getEntry(InstId::sb);
+        if(funct3 == 1)  return instTable_.getEntry(InstId::sh);
+        if(funct3 == 2)  return instTable_.getEntry(InstId::sw);
 	      if (funct3 == 3 and isRv64()) return instTable_.getEntry(InstId::sd);
       }
       return instTable_.getEntry(InstId::illegal);
 
     l13:  // 01101  U-form
       {
-        /* INSERT YOUR CODE HERE */
+        UFormInst uform(inst);
+        op0 = uform.bits.rd;
+        op1 = uform.bits.imm;
+        return instTable_.getEntry(InstId::lui);
 
       }
       return instTable_.getEntry(InstId::illegal);
 
     l24: // 11000   B-form
       {
-        /* INSERT YOUR CODE HERE */
-
+        BFormInst bform(inst);
+        op0 = bform.bits.rs2;
+        op1 = bform.bits.rs1;
+        op2 = bform.immed();
+        unsigned funct3 = bform.bits.funct3;
+        if(funct3 == 0)  return instTable_.getEntry(InstId::beq);
+        if(funct3 == 1)  return instTable_.getEntry(InstId::bne);
+        if(funct3 == 4)  return instTable_.getEntry(InstId::blt);
+        if(funct3 == 5)  return instTable_.getEntry(InstId::bge);
+        if(funct3 == 6)  return instTable_.getEntry(InstId::bltu);
+        if(funct3 == 7)  return instTable_.getEntry(InstId::bgeu);
       }
       return instTable_.getEntry(InstId::illegal);
 
     l25:  // 11001  I-form
       {
-        /* INSERT YOUR CODE HERE */
-
+        IFormInst iform(inst);
+        op0 = iform.bits.rd;
+        op1 = iform.bits.rs1;
+        op2 = iform.immed();
+        return instTable_.getEntry(InstId::jalr);
       }
       return instTable_.getEntry(InstId::illegal);
 
     l27:  // 11011  J-form
       {
-        /* INSERT YOUR CODE HERE */
-
+        JFormInst jform(inst);
+        op0 = jform.bits.rd;
+        op2 = jform.immed();
+        return instTable_.getEntry(InstId::jal);
       }
       return instTable_.getEntry(InstId::illegal);
     
     l12:  // 01100  R-form
       {
-      /* INSERT YOUR CODE HERE */
-
+      RFormInst rform(inst);
+      op0 = rform.bits.rd;
+      op1 = rform.bits.rs1;
+      op2 = rform.rs2;
+      unsigned funct3 = rform.bits.funct3;
+      unsigned funct7 = rform.bits.funct7;
 	if (funct7 == 0)
 	  {
-	    /* INSERT YOUR CODE HERE */
-      
+	    if (funct3 == 0) return instTable_.getEntry(InstId::add);
+      if (funct3 == 1) return instTable_.getEntry(InstId::sll);
+      if (funct3 == 2) return instTable_.getEntry(InstId::slt);
+      if (funct3 == 3) return instTable_.getEntry(InstId::sltu);
+      if (funct3 == 4) return instTable_.getEntry(InstId::xor);
+      if (funct3 == 5) return instTable_.getEntry(InstId::srl);
+      if (funct3 == 6) return instTable_.getEntry(InstId::or);
+      if (funct3 == 7) return instTable_.getEntry(InstId::and);
 	  }
 	else if (funct7 == 1)
 	  {
