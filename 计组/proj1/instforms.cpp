@@ -35,7 +35,7 @@ RFormInst::encodeAdd(unsigned rdv, unsigned rs1v, unsigned rs2v)
 bool
 IFormInst::encodeAddi(unsigned rdv, unsigned rs1v, int imm)
 {
-  if (rdv > 32 or rs1v > 32)
+  if (rdv > 31 or rs1v > 31)
     return false;
 
   if (imm > (1 << 11) or -imm < -(1 << 11))
@@ -59,48 +59,93 @@ IFormInst::encodeAddi(unsigned rdv, unsigned rs1v, int imm)
 bool
 IFormInst::encodeLb(unsigned rdv, unsigned rs1v, int offset)
 {
-  /* INSERT YOUR CODE HERE */
-  
+  if (rdv > 31 or rs1v > 31)
+    return false;
+
+  if (offset > (1 << 11) or -offset < -(1 << 11))
+    return false;  // Must fit in 12 bits
+
+  fields.opcode = 0x3;
+  fields.rd = rdv & 0x1f;
+  fields.funct3 = 0;
+  fields.rs1 = rs1v & 0x1f;
 }
 
 
 bool
 IFormInst::encodeSlli(unsigned rd, unsigned rs1, unsigned shamt)
 {
-  /* INSERT YOUR CODE HERE */
-
+  if (rd > 31 or rs1 > 31 or shamt >31)
+    return false;
+  fields2.opcode = 0x13;
+  fields2.funct3 = 5;
+  fields2.rd = rd & 0x1f;
+  fields2.rs1 = rs1 & 0x1f;
+  fields2.top7 = 0x20;
 }
 
 
 bool
 BFormInst::encodeBeq(unsigned rs1v, unsigned rs2v, int imm)
 {
-  /* INSERT YOUR CODE HERE */
+  if (rs1v > 31 or rs2v > 31)
+    return false;
 
+  if (imm > (1 << 11) or -imm < -(1 << 11))
+    return false;  // Must fit in 12 bits
+  bits.opcode  = 0x67;
+  bits.imm11   = (imm >>  0xa) & 1;
+  bits.imm4_1  = imm & 0xf;
+  bits.funct3  = 0;
+  bits.rs1     = rs1v & 0x1f;
+  bits.rs2     = rs2v & 0x1f;
+  bits.imm10_5 = (imm >> 0x4) & 0xf;
+  bits.imm12   = (imm >> 0xb);
 }
 
 
 bool
 SFormInst::encodeSb(unsigned rs1v, unsigned rs2v, int imm)
 {
-  /* INSERT YOUR CODE HERE */
-
+  if (rs1v > 31 or rs2v > 31)
+    return false;
+  if (imm > (1 << 11) or -imm < -(1 << 11))
+    return false;  // Must fit in 12 bits
+  bits.opcode  = 0x23;
+  bits.imm4_0  = imm & 0x1f;
+  bits.funct3  = 0;
+  bits.rs1     = rs1v & 0x1f;
+  bits.rs2     = rs2v & 0x1f;
+  bits.imm11_5 = (imm >> 0x5) & 0x7f;
 }
 
 
 bool
 UFormInst::encodeLui(unsigned rdv, int immed)
 {
-  /* INSERT YOUR CODE HERE */
-
+  if (rdv > 31)
+    return false;
+  if (immed > (1 << 19) or -immed < -(1 << 19))
+    return false;  // Must fit in 20 bits
+  bits.opcode = 0x37;
+  bits.rd     = rdv & 0x1f;
+  bits.imm    = immed & 0xfffff;
 }
 
 
 bool
 JFormInst::encodeJal(uint32_t rdv, int offset)
 {
-  /* INSERT YOUR CODE HERE */
-
+  if (rdv > 31)
+    return false;
+  if (offset > (1 << 19) or -offset < -(1 << 19))
+    return false;  // Must fit in 20 bits  
+  bits.opcode   = 0x6f;
+  bits.rd       = rdv & 0x1f;
+  bits.imm19_12 = (offset >> 0xb) & 0x1ff;
+  bits.imm11    = (offset >> 0xa) & 1;
+  bits.imm10_1  = offset & 0x2ff;
+  bits.imm20    = (offset >> 0x13) & 1;
 }
 
 
