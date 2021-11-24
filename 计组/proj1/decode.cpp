@@ -1418,7 +1418,7 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
       {
         UFormInst uform(inst);
         op0 = uform.bits.rd;
-        op1 = uform.bits.imm;
+        op1 = uform.immed();
         return instTable_.getEntry(InstId::auipc);
       }
       return instTable_.getEntry(InstId::illegal);
@@ -1444,7 +1444,7 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
       {
         UFormInst uform(inst);
         op0 = uform.bits.rd;
-        op1 = uform.bits.imm;
+        op1 = uform.immed();
         return instTable_.getEntry(InstId::lui);
 
       }
@@ -1453,8 +1453,8 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
     l24: // 11000   B-form
       {
         BFormInst bform(inst);
-        op0 = bform.bits.rs2;
-        op1 = bform.bits.rs1;
+        op1 = bform.bits.rs2;
+        op0 = bform.bits.rs1;
         op2 = bform.immed();
         unsigned funct3 = bform.bits.funct3;
         if(funct3 == 0)  return instTable_.getEntry(InstId::beq);
@@ -1469,10 +1469,11 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
     l25:  // 11001  I-form
       {
         IFormInst iform(inst);
-        op0 = iform.bits.rd;
-        op1 = iform.bits.rs1;
+        op0 = iform.fields.rd;
+        op1 = iform.fields.rs1;
         op2 = iform.immed();
-        return instTable_.getEntry(InstId::jalr);
+        unsigned funct3 = iform.fields.funct3;
+        if(funct3 == 0) return instTable_.getEntry(InstId::jalr);
       }
       return instTable_.getEntry(InstId::illegal);
 
@@ -1490,7 +1491,7 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
       RFormInst rform(inst);
       op0 = rform.bits.rd;
       op1 = rform.bits.rs1;
-      op2 = rform.rs2;
+      op2 = rform.bits.rs2;
       unsigned funct3 = rform.bits.funct3;
       unsigned funct7 = rform.bits.funct7;
 	if (funct7 == 0)
@@ -1499,10 +1500,10 @@ Hart<URV>::decode(uint32_t inst, uint32_t& op0, uint32_t& op1, uint32_t& op2,
       if (funct3 == 1) return instTable_.getEntry(InstId::sll);
       if (funct3 == 2) return instTable_.getEntry(InstId::slt);
       if (funct3 == 3) return instTable_.getEntry(InstId::sltu);
-      if (funct3 == 4) return instTable_.getEntry(InstId::xor);
+      if (funct3 == 4) return instTable_.getEntry(InstId::xor_);
       if (funct3 == 5) return instTable_.getEntry(InstId::srl);
-      if (funct3 == 6) return instTable_.getEntry(InstId::or);
-      if (funct3 == 7) return instTable_.getEntry(InstId::and);
+      if (funct3 == 6) return instTable_.getEntry(InstId::or_);
+      if (funct3 == 7) return instTable_.getEntry(InstId::and_);
 	  }
 	else if (funct7 == 1)
 	  {

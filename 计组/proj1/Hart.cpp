@@ -8197,7 +8197,8 @@ template <typename URV>
 void
 Hart<URV>::execAnd(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
+  URV v = intRegs_.read(di->op1()) & intRegs_.read(di->op2());
+  intRegs_.write(di->op0(), v);
 
 }
 
@@ -8207,8 +8208,9 @@ inline
 void
 Hart<URV>::execAndi(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
-  
+  SRV imm = di->op2As<SRV>();
+  URV v = intRegs_.read(di->op1()) & imm;
+  intRegs_.write(di->op0(), v);
 }
 
 
@@ -8216,8 +8218,10 @@ template <typename URV>
 void
 Hart<URV>::execSlt(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
-
+  SRV v1 = di->op1As<SRV>();
+  SRV v2 = di->op2As<SRV>();
+  URV v = v1 < v2 ? 1 : 0;
+  intRegs_.write(di->op0(), v);
 }
 
 
@@ -8225,8 +8229,10 @@ template <typename URV>
 void
 Hart<URV>::execSltu(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
-
+  URV v1 = di->op1As<SRV>();
+  URV v2 = di->op2As<SRV>();
+  URV v = v1 < v2 ? 1 : 0;
+  intRegs_.write(di->op0(), v);
 }
 
 
@@ -8249,7 +8255,11 @@ void
 Hart<URV>::execBne(const DecodedInst* di)
 {
   /* INSERT YOUR CODE HERE */
-
+  URV v1 = intRegs_.read(di->op0()),  v2 = intRegs_.read(di->op1());
+  if (v1 == v2)
+    return;
+  setPc(currPc_ + di->op2As<SRV>());
+  lastBranchTaken_ = true;
 }
 
 
@@ -8270,8 +8280,12 @@ template <typename URV>
 void
 Hart<URV>::execBltu(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
-
+  URV v1 = intRegs_.read(di->op0()),  v2 = intRegs_.read(di->op1());
+  if (v1 < v2)
+    {
+      setPc(currPc_ + di->op2As<SRV>());
+      lastBranchTaken_ = true;
+    }
 }
 
 
@@ -8279,8 +8293,12 @@ template <typename URV>
 void
 Hart<URV>::execBge(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
-
+  SRV v1 = intRegs_.read(di->op0()),  v2 = intRegs_.read(di->op1());
+  if (v1 > v2)
+    {
+      setPc(currPc_ + di->op2As<SRV>());
+      lastBranchTaken_ = true;
+    }
 }
 
 
@@ -8288,8 +8306,12 @@ template <typename URV>
 void
 Hart<URV>::execBgeu(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
-
+  URV v1 = intRegs_.read(di->op0()),  v2 = intRegs_.read(di->op1());
+  if (v1 > v2)
+    {
+      setPc(currPc_ + di->op2As<SRV>());
+      lastBranchTaken_ = true;
+    }
 }
 
 
@@ -8297,8 +8319,8 @@ template <typename URV>
 void
 Hart<URV>::execJal(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
-  
+  intRegs_.write(di->op0(), currPc_+4);
+  setPc(currPc_ + di->op2As<SRV>());
 }
 
 
@@ -8306,8 +8328,10 @@ template <typename URV>
 void
 Hart<URV>::execJalr(const DecodedInst* di)
 {
-  /* INSERT YOUR CODE HERE */
-
+  URV v = intRegs_.read(di->op1()); 
+  intRegs_.write(di->op0(), currPc_+4);
+  setPc(v + di->op2As<SRV>());
+  lastBranchTaken_ = true;
 }
 
 
@@ -8316,7 +8340,8 @@ void
 Hart<URV>::execAuipc(const DecodedInst* di)
 {
   /* INSERT YOUR CODE HERE */
-
+  SRV imm = di->op1As<SRV>();
+  intRegs_.write(di->op0(), imm + currPc_);
 }
 
 

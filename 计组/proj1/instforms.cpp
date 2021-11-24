@@ -130,6 +130,7 @@ UFormInst::encodeLui(unsigned rdv, int immed)
   bits.opcode = 0x37;
   bits.rd     = rdv & 0x1f;
   bits.imm    = immed & 0xfffff;
+  return true;
 }
 
 
