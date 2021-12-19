@@ -30,7 +30,9 @@ module ALU (
    wire [31:0] sum;
    wire isLT;
    wire isLTU;
-   reg signed[31:0] A reg;
+   reg signed[31:0] Areg;
+   reg [31:0] ALUResult;
+
    assign Binvert = ~(ALUCode == 0);
    adder_32bits adder(.a(A), .b(32{Binvert}^B), .ci(Binvert), .s(sum), .co());
    assign isLT=A[31]&&(~B[31]) || (A[31]~^B[31])&& sum[31];
@@ -50,6 +52,8 @@ module ALU (
          alu_sra: ALUResult = AReg>>>B;
          alu_slt: ALUResult = isLT?32'b1:32'b0;
          alu_sltu:ALUResult = isLTU?32'b1:32'b0;
+         default: ALUResult = sum;
+      endcase
    end
 
 endmodule

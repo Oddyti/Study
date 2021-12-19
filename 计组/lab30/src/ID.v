@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// 基本完成 
+// 
 //////////////////////////////////////////////////////////////////////////////////
 module ID(clk,Instruction_id, PC_id, RegWrite_wb, rdAddr_wb, RegWriteData_wb, MemRead_ex, 
           rdAddr_ex, MemtoReg_id, RegWrite_id, MemWrite_id, MemRead_id, ALUCode_id, 
@@ -53,14 +53,14 @@ module ID(clk,Instruction_id, PC_id, RegWrite_wb, rdAddr_wb, RegWriteData_wb, Me
 
     // Registers 
     Registers Registers1(
-        .ReadRegister1(rs1Addr_id),
-        .ReadRegister2(rs2Addr_id),
-        .WriteData(RegWriteDate_wb),    // 待写入数据
-        .WriteRegister(edAddr_wb),   //目标寄存器号
-        .clk(clk),
-        .RegWrite(RegWrite_wb),     // 写允许信号
-        .ReadData1(rs1Data_id),
-        .ReadDate2(rs2Data_id)
+        .clk(clk), 
+        .rs1Addr(rs1Addr_id), 
+        .rs2Addr(rs2Addr_id), 
+        .WriteAddr(rdAddr_wb), 
+        .RegWrite(RegWrite_wb), 
+        .WriteData(RegWriteData_wb), 
+        .rs1Data(rs1Data_id), 
+        .rs2Data(rs2Data_id)
     ); 
 
     // Hazard Detector
@@ -84,5 +84,12 @@ module ID(clk,Instruction_id, PC_id, RegWrite_wb, rdAddr_wb, RegWriteData_wb, Me
         .in1(rs1Data_id);
         .out(JALR_Addr)
     );
-
+    adder_32bits addr32(
+        .a(JALR_Addr),
+        .b(offset),
+        .ci(0),
+        .s(JumpAddr),
+        .co()
+    );
+    
 endmodule
