@@ -15,6 +15,7 @@ module ID(clk,Instruction_id, PC_id, RegWrite_wb, rdAddr_wb, RegWriteData_wb, Me
     input [31:0] RegWriteData_wb;
     input MemRead_ex;
     input [4:0] rdAddr_ex;
+
     output MemtoReg_id;
     output RegWrite_id;
     output MemWrite_id;
@@ -30,59 +31,77 @@ module ID(clk,Instruction_id, PC_id, RegWrite_wb, rdAddr_wb, RegWriteData_wb, Me
     output [31:0] Imm_id;
     output [31:0] rs1Data_id;
     output [31:0] rs2Data_id;
-	output[4:0] rs1Addr_id,rs2Addr_id,rdAddr_id;
+	output [4:0] rs1Addr_id,rs2Addr_id,rdAddr_id;
 
-    wire [31:0] offset;
- 
-    // Decode
-    Decode Decode1(
-        .Instruction(Instruction_id),	// current instruction
-        .MemtoReg(MemtoReg_id),		// use memory output as into register
-        .RegWrite(RegWrite_id),		// enable writing back to 
-        .MemWrite(MemWrite_id),		// write to memory
-        .MemRead(MemRead_id),
-        .ALUCode(ALUCode_id),         // ALU operation select
-        .ALUSrcA(ALUSrcA_id),
-        .ALUSrcB(ALUSrcB_id),
-        .Jump(JUMP),
-        .JALR(JALR),
-        .Imm(Imm_id),
-        .offset(offset)
+    wire[31:0] offset;
+    wire JALR;
+    wire[31:0] JALR_addr;
+
+    assign rs1Addr_id = Instruction_id[19:15];
+    assign rs2Addr_id = Instruction_id[24:20];
+    assign rdAddr_id = Instruction_id[11:7];
+
+    //Registers
+    Registers Registers_1(
+        //input
+        .clk(clk), 
+        .rs1Addr(rs1Addr_id), 
+        .rs2Addr(rs2Addr_id), 
+        .RegWrite(RegWrite_wb), 
+        .WriteAddr(rdAddr_wb), 
+        .WriteData(RegWriteData_wb), 
+        //output
+        .rs1Data(rs1Data_id), 
+        .rs2Data(rs2Data_id)
     );
 
+    //Decode
+    Decode Decode_1(
+        //output
+        .MemtoReg(MemtoReg_id), 
+        .RegWrite(RegWrite_id), 
+        .MemWrite(MemWrite_id), 
+        .MemRead(MemRead_id),
+        .ALUCode(ALUCode_id),
+        .ALUSrcA(ALUSrcA_id),
+        .ALUSrcB(ALUSrcB_id),
+        .Jump(Jump),
+        .JALR(JALR),
+        .Imm(Imm_id),
+        .offset(offset),
+        //input
+        .Instruction(Instruction_id)
+    );
 
-    // Registers 
-    Registers Registers1(
-        .ReadRegister1(rs1Addr_id),
-        .ReadRegister2(rs2Addr_id),
-        .WriteData(RegWriteDate_wb),    // 待写入数据
-        .WriteRegister(edAddr_wb),   //目标寄存器号
-        .clk(clk),
-        .RegWrite(RegWrite_wb),     // 写允许信号
-        .ReadData1(rs1Data_id),
-        .ReadDate2(rs2Data_id)
-    ); 
-
-    // Hazard Detector
-    assign Stall = ((reAddr_ex == rs1Addr_id)||(rdAddr_ex == rs2Addr_id))&&MemRead_ex;
-    assign IFWrite = ~Stall;
-
-    // BranchTest 
-    BranchTest BranchTest1(
+    //BranchTest
+    BranchTest BranchTest_1(
+        //input
         .Instruction(Instruction_id), 
         .rs1Data(rs1Data_id), 
         .rs2Data(rs2Data_id), 
+        //output
         .Branch(Branch)
     );
 
-    wire JALR;
-    wire [31:0] JALR_Addr;
-    // 二路选择器
-    mux_2to1 mux1(
-        .addr(JALR),
-        .in0(PC_id),
-        .in1(rs1Data_id);
-        .out(JALR_Addr)
+    mux2 #(.n(32)) m_1(
+        //input
+        .in0(PC_id), 
+        .in1(rs1Data_id), 
+        .addr(JALR), 
+        //output
+        .out(JALR_addr)
     );
 
+    adder_32bits adder_1(
+        .a(offset), 
+        .b(JALR_addr), 
+        .ci(0), 
+        .s(JumpAddr), 
+        .co()
+    );
+
+    //Hazard Detector
+    assign Stall = ((rdAddr_ex==rs1Addr_id) || (rdAddr_ex==rs2Addr_id)) && MemRead_ex;
+    assign IFWrite = ~Stall;    
+ 
 endmodule
