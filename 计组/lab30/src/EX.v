@@ -42,4 +42,41 @@ module EX(ALUCode_ex, ALUSrcA_ex, ALUSrcB_ex,Imm_ex, rs1Addr_ex, rs2Addr_ex, rs1
         .B(ALU_B)
     );
 
+    wire [31:0] outA;
+    // 数据选择器
+    mux_3to1 mux3_1(
+        .in0(rs1Data_ex),
+        .in1(RegWriteData_wb),
+        .in2(ALUResult_mem),
+        .addr(ForwardA),
+        .out(outA)
+    );
+
+    wire [31:0] outB;
+    mux_3to1 mux3_2(
+        .in0(rs2Data_ex),
+        .in1(RegWriteData_wb),
+        .in2(ALUResult_mem),
+        .addr(ForwardB),
+        .out(outB)
+    );
+
+    mux_3to1 mux3_3(
+        .in0(outB),
+        .in1(Imm_ex),
+        .in2(32'd4),
+        .addr(ALUSrcB_ex),
+        .out(ALU_B)
+    );
+
+    mux_2to1 mux2(
+        .in0(outA),
+        .in1(PC_ex),
+        .addr(ALUSrcA_ex),
+        .out(ALU_A)
+    );
+
+
+
+
 endmodule

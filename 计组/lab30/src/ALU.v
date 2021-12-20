@@ -30,7 +30,7 @@ module ALU (
    wire [31:0] sum;
    wire isLT;
    wire isLTU;
-   reg signed[31:0] Areg;
+   reg signed[31:0] A_reg;
    reg [31:0] ALUResult;
 
    assign Binvert = ~(ALUCode == 0);
@@ -39,7 +39,7 @@ module ALU (
    assign isLTU= (~A[31] )&& B[31] || (A[31] ~^B[31]) && sum[31];
 
    always @(*) begin
-      AReg  = A;
+      A_Reg  = A;
       case(ALUCode)
          alu_add: ALUResult = sum;
          alu_sub: ALUResult = sum;

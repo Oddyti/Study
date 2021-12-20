@@ -17,10 +17,38 @@ module IF(clk, reset, Branch,Jump, IFWrite, JumpAddr,Instruction_if,PC,IF_flush)
     wire [5:0] addr;        //PC的前6位
     wire [31:0] MuxOut;     //指令指针选择器的结果
     wire [31:0] NextPC_if;  //PC+4的结果
+
     assign IF_flush = Jump|Branch;
     assign addr = PC[5:0];
-    InstructionROM ins(.addr(addr), .dout(Instruction_if));  
-    adder_32bits adder(.a(PC), .b(32'h4), .ci(), .s(NextPC_if), .co());
-    dffr dffr1(.d(MuxOut), .r(IFWrite), .clk(clk), .q(PC));
-    mux2 mux(.a(NextPC_if), .b(JumpAddr), .addr(IF_flush), .dout(MuxOut))
+
+    InstructionROM ins(
+        .addr(addr), 
+        .dout(Instruction_if)
+    ); 
+
+    adder_32bits adder(
+        .a(PC), 
+        .b(32'd4), 
+        .ci(0), 
+        .s(NextPC_if), 
+        .co()
+    );
+
+    // PC寄存器
+    always @(posedge clk) begin
+        if (reset) begin
+            PC <= 0;
+        end
+        else if(IFWrite) begin
+            PC <= Muxout;
+        end
+    end
+
+    mux_2to1 #(.n(32)) mux(
+        .in0(NextPC_if), 
+        .in1(JumpAddr), 
+        .addr(IF_flush), 
+        .dout(MuxOut)
+    );
+
 endmodule
