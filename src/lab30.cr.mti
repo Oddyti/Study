@@ -1,0 +1,157 @@
+D:/Report/src/EX.v {1 {vlog -work work -vopt -stats=none D:/Report/src/EX.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module EX
+
+Top level modules:
+	EX
+
+} {} {}} D:/Report/src/ID.v {1 {vlog -work work -vopt -stats=none D:/Report/src/ID.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module ID
+
+Top level modules:
+	ID
+
+} {} {}} D:/Report/src/adder_32bits.v {1 {vlog -work work -vopt -stats=none D:/Report/src/adder_32bits.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module adder_32bits
+
+Top level modules:
+	adder_32bits
+
+} {} {}} D:/Report/src/IF.v {1 {vlog -work work -vopt -stats=none D:/Report/src/IF.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module IF
+
+Top level modules:
+	IF
+
+} {} {}} D:/Report/src/ALU_tb.v {1 {vlog -work work -vopt -stats=none D:/Report/src/ALU_tb.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module ALU_tb
+
+Top level modules:
+	ALU_tb
+
+} {} {}} D:/Report/src/mux_3to1.v {1 {vlog -work work -vopt -stats=none D:/Report/src/mux_3to1.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module mux_3to1
+
+Top level modules:
+	mux_3to1
+
+} {} {}} D:/Report/src/InstructionROM.v {1 {vlog -work work -vopt -stats=none D:/Report/src/InstructionROM.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module InstructionROM
+
+Top level modules:
+	InstructionROM
+
+} {} {}} D:/Report/src/ID_EX.v {1 {vlog -work work -vopt -stats=none D:/Report/src/ID_EX.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module ID_EX
+
+Top level modules:
+	ID_EX
+
+} {} {}} D:/Report/src/Decode_tb.v {1 {vlog -work work -vopt -stats=none D:/Report/src/Decode_tb.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module Decode_tb
+
+Top level modules:
+	Decode_tb
+
+} {} {}} D:/Report/src/ALU.v {1 {vlog -work work -vopt -stats=none {D:\Report\src\ALU.v}
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module ALU
+
+Top level modules:
+	ALU
+
+} {} {}} D:/Report/src/Risc5CPU_tb.v {1 {vlog -work work -vopt -stats=none D:/Report/src/Risc5CPU_tb.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module Risc5CPU_tb_v
+
+Top level modules:
+	Risc5CPU_tb_v
+
+} {} {}} D:/Report/src/RBWRegisters.v {1 {vlog -work work -vopt -stats=none D:/Report/src/RBWRegisters.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module RBWRegisters
+
+Top level modules:
+	RBWRegisters
+
+} {} {}} D:/Report/src/IF_ID.v {1 {vlog -work work -vopt -stats=none D:/Report/src/IF_ID.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module IF_ID
+
+Top level modules:
+	IF_ID
+
+} {} {}} D:/Report/src/Decode.v {1 {vlog -work work -vopt -stats=none D:/Report/src/Decode.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module Decode
+
+Top level modules:
+	Decode
+
+} {} {}} D:/Report/src/IF_tb.v {1 {vlog -work work -vopt -stats=none D:/Report/src/IF_tb.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module IF_tb
+
+Top level modules:
+	IF_tb
+
+} {} {}} {D:/Report/src/Branch Test.v} {1 {vlog -work work -vopt -stats=none {D:/Report/src/Branch Test.v}
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module BranchTest
+
+Top level modules:
+	BranchTest
+
+} {} {}} D:/Report/src/Risc5CPU.v {0 {vlog -work work -vopt -stats=none D:/Report/src/Risc5CPU.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module Risc5CPU
+** Error: D:/Report/src/Risc5CPU.v(169): Illegal part-select expression for variable "ALUResult_mem"
+** Error: D:/Report/src/Risc5CPU.v(169): (vlog-2957) MSB of part-select into 'ALUResult_mem' is out of bounds.
+
+** Error: D:/Report/src/Risc5CPU.v(169): (vlog-2957) LSB of part-select into 'ALUResult_mem' is out of bounds.
+
+
+} {4.0 6.0 7.0 8.0} {}} D:/Report/src/MEM_WB.v {1 {vlog -work work -vopt -stats=none D:/Report/src/MEM_WB.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module MEM_WB
+
+Top level modules:
+	MEM_WB
+
+} {} {}} D:/Report/src/mux_2to1.v {1 {vlog -work work -vopt -stats=none D:/Report/src/mux_2to1.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module mux_2to1
+
+Top level modules:
+	mux_2to1
+
+} {} {}} D:/Report/src/Registers.v {1 {vlog -work work -vopt -stats=none D:/Report/src/Registers.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module Registers
+
+Top level modules:
+	Registers
+
+} {} {}} D:/Report/src/EX_MEM.v {1 {vlog -work work -vopt -stats=none D:/Report/src/EX_MEM.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module EX_MEM
+
+Top level modules:
+	EX_MEM
+
+} {} {}} D:/Report/src/adder_32bits_tb.v {1 {vlog -work work -vopt -stats=none D:/Report/src/adder_32bits_tb.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+-- Compiling module adder_32bits_tb
+
+Top level modules:
+	adder_32bits_tb
+
+} {} {}}

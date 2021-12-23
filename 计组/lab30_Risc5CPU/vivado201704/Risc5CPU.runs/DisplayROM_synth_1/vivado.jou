@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2021.1.1 (64-bit)
+# SW Build 3286242 on Wed Jul 28 13:10:47 MDT 2021
+# IP Build 3279568 on Wed Jul 28 16:48:48 MDT 2021
+# Start of session at: Thu Dec 23 14:41:53 2021
+# Process ID: 5648
+# Current directory: D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/DisplayROM_synth_1
+# Command line: vivado.exe -log DisplayROM.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source DisplayROM.tcl
+# Log file: D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/DisplayROM_synth_1/DisplayROM.vds
+# Journal file: D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/DisplayROM_synth_1\vivado.jou
+#-----------------------------------------------------------
+source DisplayROM.tcl -notrace
