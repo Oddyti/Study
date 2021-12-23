@@ -1,4 +1,3 @@
-\ProvidesClass{../source/Paper}
 \LoadClass{ctexart}
 %宏包
 \RequirePackage{xeCJK}
@@ -14,7 +13,6 @@
 \RequirePackage{mathtools}
 \RequirePackage{float}
 \RequirePackage{indentfirst}
-\RequirePackage{zhnumber}
 \RequirePackage{multirow}
 \RequirePackage{subfigure}
 \RequirePackage{listings}
@@ -83,48 +81,6 @@
 	\rhead{学号：\@stuid}
 %
 
-%代码块样式
-% 	\lstset{
-% 	language = Verilog,
-% 	basicstyle=\small\fontspec{Hack},
-% 		% basicstyle=\small\ttfamily,	% 基本样式
-% 		keywordstyle=\color{blue}, % 关键词样式
-% 		commentstyle=\color{gray!40!black!60},   	% 注释样式
-% 		stringstyle=\rmfamily\slshape\color{red}, 	% 字符串样式
-% 		backgroundcolor=\color{white},     % 代码块背景颜色
-% 		frame=leftline,						% 代码框形状
-% 		framerule=12pt,%
-% 		rulecolor=\color{gray!10},      % 代码框颜色
-% 		numbers=left,				% 左侧显示行号往左靠, 还可以为right ，或none，即不加行号
-% 		numberstyle=\footnotesize\fontspec{Hack},	% 行号的样式
-% 		firstnumber=1,
-% 		stepnumber=1,                  	% 若设置为2，则显示行号为1,3,5
-% 		numbersep=3pt,               	% 行号与代码之间的间距
-% 		aboveskip=.25em, 			% 代码块边框
-% 		showspaces=false,               	% 显示添加特定下划线的空格
-% 		showstringspaces=false,         	% 不显示代码字符串中间的空格标记
-% 		keepspaces=true, 					
-% 		showtabs=false,                 	% 在字符串中显示制表符
-% 		tabsize=2,                     		% 默认缩进2个字符
-% 		captionpos=b,                   	% 将标题位置设置为底部
-% 		flexiblecolumns=false, 			%?
-% 		breaklines=false,                	% 设置自动断行
-% 		breakatwhitespace=false,        	% 设置自动中断是否只发生在空格处
-% 		breakautoindent=true,			%
-% 		breakindent=1em, 			%
-% 		title=\lstname,				%
-% 		escapeinside=``,  			% 在``里显示中文
-% 		xleftmargin=2em,  xrightmargin=1em,     % 设定listing左右的空白
-% 		aboveskip=1ex, belowskip=1ex,
-% 		framextopmargin=1pt, framexbottommargin=1pt,
-% 			abovecaptionskip=-2pt,belowcaptionskip=3pt,
-% 		% 设定中文冲突，断行，列模式，数学环境输入，listing数字的样式
-% 		extendedchars=false, columns=flexible, mathescape=true,
-% 		texcl=true,
-% 		fontadjust
-% 	}
-% %
-
 \lstset{
     basicstyle          =   \normalsize\fontspec{Hack},          % 基本代码风格
     keywordstyle        =   \color[RGB]{1, 1, 194},          % 关键字风格
@@ -154,8 +110,8 @@
 		\begin{center}
 			\bfseries\huge{\@articletitle}
 		\end{center}
-		%间距0.6cm
-		\vspace{0.6cm}
+		%间距0.4cm
+		\vspace{0.4cm}
 		%个人信息
 		{\noindent\normalsize\kaishu{\@name；\@stuid；\@college；\@major}} \par
 		%摘要
@@ -164,5 +120,6 @@
 		%关键词
 		{\noindent\normalsize\heiti{关键词：}}
 		{\normalsize\kaishu{\@Keyword}}
+		\vspace{0.2cm}
 	}
 %
