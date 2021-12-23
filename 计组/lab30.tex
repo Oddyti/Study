@@ -2,7 +2,7 @@
 
 \major{信息工程}
 \name{姚桂涛}
-\title{快速加法器的设计}
+\title{基于RV32I指令集的RISC-V微处理器设计}
 \stuid{3190105597}
 \college{信息与电子工程学院}
 \date{\today}
@@ -10,12 +10,42 @@
 \course{计算机组成与设计}
 \instructor{屈民军、唐奕}
 \grades{}
-\expname{快速加法器的设计}
-\exptype{设计验证}
+\expname{RISC-V微处理器设计}
+\exptype{设计}
 \partner{}
 \begin{document}
-\makecover
-\makeheader
+    \makecover
+    \makeheader
+    \section{实验目的}
+    
+    \section{实验任务}
+        \subsection{基本要求}
+        设计一个流水线RISC-V微处理器，具体要求如下所述。
+
+        (1) \, 至少运行下列RV32I核心指令。
+
+        算术运算指令：add、sub、addi
+
+        逻辑运算指令：and、or、xor、slt、sltu、di、ori、xori、slti、sltiu
+
+        移位指令：sll、srl、sra、slli、srli、srai
+
+        条件分支指令：beq、bne、blt、bge、bltu、eu
+
+        无条件跳转指令：jal、jalr
+
+        数据传送指令：lw、sw、lui、auipc
+    
+        空指令：nop
+
+        (2) \, 采用 5 级流水线技术，对数据冒险实现转发或阻塞功能。
+
+        (3) \, 在 Nexys Video 开发系统中实现RISC-V 微处理器， 要求 CPU 的运行速度大于 25MHz。
+        \subsection{扩展要求}
+        (1) \, 要求设计的微处理器还能运行lb、lh、ld、lbu、lhu、lwu、sb、sh 或 sd 等字节、半字和双字数据传送指令。
+        
+        (2) \, 要求设计的CPU 增加异常(exception)、自陷(trap)、中断(interrupt)等处理方案。
+        
 
 
 
