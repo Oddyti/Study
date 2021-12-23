@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2021.1.1 (64-bit)
+# SW Build 3286242 on Wed Jul 28 13:10:47 MDT 2021
+# IP Build 3279568 on Wed Jul 28 16:48:48 MDT 2021
+# Start of session at: Thu Dec 23 14:06:46 2021
+# Process ID: 31512
+# Current directory: D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/xsim.dir/Risc5CPU_tb_v_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/xsim.dir/Risc5CPU_tb_v_behav/webtalk/xsim_webtalk.tcl -notrace

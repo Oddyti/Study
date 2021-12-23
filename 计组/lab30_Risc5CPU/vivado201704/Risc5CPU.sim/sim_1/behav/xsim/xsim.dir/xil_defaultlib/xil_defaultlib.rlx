@@ -1,0 +1,26 @@
+0.7
+2020.2
+Jul 28 2021
+13:32:51
+D:/Modelsim/lab30_Risc5CPU/src/ALU.v,1640090592,verilog,,D:/Modelsim/lab30_Risc5CPU/src/Branch Test.v,,ALU,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/Branch Test.v,1640219246,verilog,,D:/Modelsim/lab30_Risc5CPU/src/Decode.v,,BranchTest,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/Decode.v,1640100476,verilog,,D:/Modelsim/lab30_Risc5CPU/src/EX.v,,Decode,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/EX.v,1640246999,verilog,,D:/Modelsim/lab30_Risc5CPU/src/EX_MEM.v,,EX,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/EX_MEM.v,1640084824,verilog,,D:/Modelsim/lab30_Risc5CPU/src/ID.v,,EX_MEM,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/ID.v,1640222261,verilog,,D:/Modelsim/lab30_Risc5CPU/src/ID_EX.v,,ID,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/ID_EX.v,1640242321,verilog,,D:/Modelsim/lab30_Risc5CPU/src/IF.v,,ID_EX,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/IF.v,1640219367,verilog,,D:/Modelsim/lab30_Risc5CPU/src/IF_ID.v,,IF,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/IF_ID.v,1640084824,verilog,,D:/Modelsim/lab30_Risc5CPU/src/InstructionROM.v,,IF_ID,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/InstructionROM.v,1632960023,verilog,,D:/Modelsim/lab30_Risc5CPU/src/MEM_WB.v,,InstructionROM,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/MEM_WB.v,1640084824,verilog,,D:/Modelsim/lab30_Risc5CPU/src/RBWRegisters.v,,MEM_WB,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/RBWRegisters.v,1640091809,verilog,,D:/Modelsim/lab30_Risc5CPU/src/Registers.v,,RBWRegisters,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/Registers.v,1640245836,verilog,,D:/Modelsim/lab30_Risc5CPU/src/Risc5CPU.v,,Registers,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/Risc5CPU.v,1640244647,verilog,,D:/Modelsim/lab30_Risc5CPU/src/adder_32bits.v,,Risc5CPU,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/Risc5CPU_tb.v,1632960022,verilog,,,,Risc5CPU_tb_v,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/adder_32bits.v,1633864718,verilog,,D:/Modelsim/lab30_Risc5CPU/src/adder_4bits.v,,adder_32bits,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/adder_4bits.v,1632963475,verilog,,D:/Modelsim/lab30_Risc5CPU/src/csa.v,,adder_4bits,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/csa.v,1640219375,verilog,,D:/Modelsim/lab30_Risc5CPU/src/mux_2to1.v,,csa,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/mux_2to1.v,1616487962,verilog,,D:/Modelsim/lab30_Risc5CPU/src/mux_3to1.v,,mux_2to1,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/src/mux_3to1.v,1640084824,verilog,,D:/Modelsim/lab30_Risc5CPU/src/Risc5CPU_tb.v,,mux_3to1,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.gen/sources_1/ip/DataRAM/sim/DataRAM.v,1640239196,verilog,,D:/Modelsim/lab30_Risc5CPU/src/ALU.v,,DataRAM,,,,,,,,
+D:/Modelsim/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/glbl.v,1623370582,verilog,,,,glbl,,,,,,,,

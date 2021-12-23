@@ -1,0 +1,29 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../Risc5CPU.gen/sources_1/ip/DataRAM/sim/DataRAM.v" \
+"../../../../../src/ALU.v" \
+"../../../../../src/Branch Test.v" \
+"../../../../../src/Decode.v" \
+"../../../../../src/EX.v" \
+"../../../../../src/EX_MEM.v" \
+"../../../../../src/ID.v" \
+"../../../../../src/ID_EX.v" \
+"../../../../../src/IF.v" \
+"../../../../../src/IF_ID.v" \
+"../../../../../src/InstructionROM.v" \
+"../../../../../src/MEM_WB.v" \
+"../../../../../src/RBWRegisters.v" \
+"../../../../../src/Registers.v" \
+"../../../../../src/Risc5CPU.v" \
+"../../../../../src/adder_32bits.v" \
+"../../../../../src/adder_4bits.v" \
+"../../../../../src/csa.v" \
+"../../../../../src/mux_2to1.v" \
+"../../../../../src/mux_3to1.v" \
+"../../../../../src/Risc5CPU_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
