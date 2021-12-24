@@ -43,9 +43,37 @@
         (3) \, 在 Nexys Video 开发系统中实现RISC-V 微处理器， 要求 CPU 的运行速度大于 25MHz。
         \subsection{扩展要求}
         (1) \, 要求设计的微处理器还能运行lb、lh、ld、lbu、lhu、lwu、sb、sh 或 sd 等字节、半字和双字数据传送指令。
-        
+
         (2) \, 要求设计的CPU 增加异常(exception)、自陷(trap)、中断(interrupt)等处理方案。
         
+    \section{实验原理与模块设计}
+        \subsection{总体设计}
+        流水线是数字系统中一种提高系统稳定性和工作速度的方法，广泛应用于高档CPU 的架构中。根据RISC-V 处理器指令的特点，将指令整体的处理过程分为取指令（IF）、指令译码（ID）、执行（EX）、存储器访问（MEM）和寄存器回写（WB）五级。如图30. 2 示，一个指令的执行需要 5 个时钟周期，每个时钟周期的上升沿来临时，此指令所代表的一系列数据和控制信息将转移到下一级处理。
+
+        图  所示为符合设计要求的流水线 RISC-V 微处理器的原理框图，采用五级流水线。由于在流水线中 ，数据和控制信息将在时钟周期的上升沿转移到下一级，所以规定流水线转移的变量命名遵守如下 格式：名称\_流水线级名称。如，在 ID 级指令译码电路（decode）产生的寄存器写允许信号 RegWrite 在ID 级、EX 级、MEM 级和WB 级上的命名分别为RegWrite\_id、RegWrite\_ex 、RegWrite\_mem 和RegWrite\_wb。在顶层文件中，类似的变量名称有近百个，这样的命名方式起到了很好的识别作用。
+
+        \subsection{流水线RISC-V微处理器的设计}
+        根据流水线不同阶段，将系统划分为 IF、ID、EX 和 MEM 四大模块，WB 部分功能电路非常简单，可直接在顶层文件中设计。另外，系统还包含 IF/ID、ID/EX、EX/MEM、MEM/WB 四个流水线寄存器。
+        \subsubsection{取指令级模块（IF）的设计}
+
+        \subsubsection{指令译码模块（ID）的设计}
+
+        \subsubsection{执行模块（EX）的设}
+
+        \subsubsection{数据存储器模块（DataRAM）的设计}
+
+        \subsubsection{流水线寄存器的设计}
+
+        \subsubsection{顶层文件的设计}
+
+    \subsection{实验设备}
+        \begin{enumerate}
+            \item  装有Vivado 和 ModelSim SE 软件的计算机。
+            \item  Nexys Video 开发板一套。
+            \item  带有HDMI 接口的显示器一台。
+        \end{enumerate}
+
+    \section{实验结果}
 
 
 
