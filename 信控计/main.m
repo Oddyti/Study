@@ -19,4 +19,11 @@
 %  量化
     % 量化bit
     qN = 8;
-    [qt_MyAudio, q]
+    [qt_MyAudio, q] = 
+% 
+
+%  信源编码
+    % unique函数：对数组按升序排序，并去掉多余的重复的值
+    % cell数组：元胞数组，每个单元可以储存不同类型的变量
+    % numel(A)函数：Numbers of Elements返回数组A中元素的个数
+    % find(A = b)：返回一个列向量，记录了数组A中等于b的元素的位置（按列数）
