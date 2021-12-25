@@ -19,7 +19,8 @@
 %  量化
     % 量化bit
     qN = 8;
-    [qt_MyAudio, q] = 
+    q = (1-(-1))/2^qN;
+    qAudio = floor((MyAudio + 1)/q);
 % 
 
 %  信源编码
@@ -27,3 +28,22 @@
     % cell数组：元胞数组，每个单元可以储存不同类型的变量
     % numel(A)函数：Numbers of Elements返回数组A中元素的个数
     % find(A = b)：返回一个列向量，记录了数组A中等于b的元素的位置（按列数）
+
+    len = length(qAudio);
+    unique_x = unique(qAudio);
+    unique_len = length(unique_x);
+
+    symbols = cell(1, unique_len);
+    p = zeros(1, unique_len);
+
+    for i = 1:unique_len
+        symbols{1,i} = unique_x(i);
+        p(i) = numel(find(qAudio==unique_x(i))) / len;
+    end
+
+    [dict, avglen] = huffmandict(symbols, p);
+
+    source_encode = huffmanenco(qAudio, dict);
+% 
+% 信道编码
+    
