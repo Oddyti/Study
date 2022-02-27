@@ -1,0 +1,65 @@
+\documentclass{../source/Experiment}
+
+\major{信息工程}
+\name{姚桂涛}
+\title{k-近邻算法改进约会网站的配对效果}
+\stuid{3190105597}
+\college{信息与电子工程学院}
+\date{\today}
+\lab{教11-400}
+\course{人工智能实验}
+\instructor{胡浩基、魏准}
+\grades{}
+\expname{k-近邻算法改进约会网站的配对效果}
+\exptype{设计验证}
+\partner{}
+\begin{document}
+    \makecover
+    \section{实验题目}
+    k-近邻算法改进约会网站的配对效果
+
+    通过收集的一些约会网站的数据信息，对匹配对象的归类：不喜欢的人、魅力一般的人、极具魅力的人。
+
+    数据中包含了3种特征：
+
+    每年获得的飞行常客里程数、玩视频游戏所耗时间百分比、每周消费的冰淇淋公升数
+    
+    \section{实验代码}
+    \lstinputlisting[
+        language  =   Python
+]{./Part1/lab2.py}
+    \section{实验结果及分析}
+    \begin{lstlisting}[language=Python]
+    前20个数据测试结果和原数据比较
+    ---------------------——---
+        TestResult  OriginTest
+    0            2           2
+    1            3           3
+    2            1           3
+    3            2           2
+    4            2           2
+    5            3           3
+    6            3           3
+    7            2           2
+    8            1           1
+    9            1           1
+    10           1           1
+    11           3           3
+    12           2           2
+    13           2           2
+    14           1           1
+    15           2           2
+    16           1           1
+    17           2           2
+    18           1           1
+    19           3           3
+    ---------------------——---
+    正确率97.00%
+    \end{lstlisting}
+
+    从实验结果可以看出，通过k-近邻算法改进后的约会网站的配对效果比较显著，多次随机划分测试集和训练集后发现正确率基本可以达到90\%以上。
+
+
+\end{document}
+
+
