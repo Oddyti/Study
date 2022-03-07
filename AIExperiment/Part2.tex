@@ -1,0 +1,54 @@
+\documentclass{../source/Experiment}
+
+\major{信息工程}
+\name{姚桂涛}
+\title{回归模型}
+\stuid{3190105597}
+\college{信息与电子工程学院}
+\date{\today}
+\lab{教11-400}
+\course{人工智能实验}
+\instructor{胡浩基、魏准}
+\grades{}
+\expname{回归模型}
+\exptype{设计验证}
+\partner{}
+\begin{document}
+    \makecover
+    \section{实验题目}
+        \subsection{线性回归}
+        编写程序，通过产生的附加噪声的随机数据，（1）做线性回归（即求出𝜽）；（2）利用取得的回归模型，对x=0和x=2两个点做预测；（3）对上述随机数据和预测结果利用plot可视化。
+
+        \subsection{多项式回归}
+       
+        通过网上调研了解Scikit -Learn中的LinearRegression模块，编写程序，利用LinearRegression模块：（1）对上述产生的二级多项式数据（X\_poly, y） 做线性回归。（2） 可视化回归模型和数据。
+
+
+        \subsection{逻辑回归}
+
+        （1）查阅网上资料，通过sklearn.linear\_model中的LogisticRegression，利用花瓣宽度，实现一个分类器检测维吉亚鸢尾花。
+        （2）可视化花瓣宽度0-3 cm之间的鸢尾花模型估算出的概率
+    
+    \section{实验代码}
+    \subsection{线性回归}
+    \lstinputlisting[
+        language  =   Python,
+        title = {Linear Regression}
+        ]{./Part2/lab1.py}
+    \lstinputlisting[
+            language  =   Python,
+            title = {Polynomial Regression}
+        ]{./Part1/lab2.py}
+    \subsection{多项式回归}
+    \lstinputlisting[
+            language  =   Python,
+            title = {Logistic Regression}
+        ]{./Part2/lab3.py}
+    \subsection{多项式回归}
+
+    \section{实验结果}
+    
+
+\end{document}
+
+
