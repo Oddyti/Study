@@ -1,71 +1,135 @@
-表格 1,,,,
-日期,单词,中文,联想,
-2022年2月27日,deprive,剥夺,,
-,metaphor,隐喻,,
-,intricate,复杂的,,
-,apt,恰当的,,
-,bait,鱼饵,,
-,foam,泡沫,,
-,hasty,匆忙的，仓促的,,
-,verge,边缘,,
-,snobbish,势利的,,
-,warranty,担保，保证,,
-,foremost,最突出的,,
-,decimal,小数，十进制,,
-,inverse,倒转的，反向的,,
-,incentive,诱因，刺激，动机,,
-,amuse,逗笑,amusing,
-,retrieve,重新得到，取回，收回,,
-,maiden,少女,virgin,
-2022年3月1日,rib,肋骨,,
-,petty,琐碎的，微不足道的,,
-,prejudice,偏见、歧视,,
-,expire,终止,,
-,infrared,红外线,infra+red,
-,eminent,杰出的,杰出的Eminem,
-,substitute,替代,substitute A for B,
-,fatigue,疲劳、劳累,,
-,democratic,民主的,德先生,
-,hypocrisy,虚伪,hypocrite伪君子,
-,exceed,超过，超出,,
-,metropolitan,大都会的，大城市的,,
-,bathe,（在河里、海里）游泳,区别于bath,
-,courtesy,礼貌,法庭上要讲礼貌,
-,fuse,合并，融合,,
-,disposition,性格，性情,,
-,fiscal,财政的,,
-,leaflet,发传单，传单,let leaf发小叶子,
-,pharmacy,药店,pharm = drug是药品相关的词根,
-,duplicate,复制，被复制,"copy, replicate, duplicate",
-,scarce,缺乏的，缺少的,scarce metals 稀有金属，lack,
-,freelance,自由职业的,,
-,appal,使得惊骇,区分appal（吓人）和appeal（吸引人）,
-2022年3月7日,revenue,财政收入,,
-,component,部件，零件；组成的,,
-,coalition,结合体，同盟,,
-,cottage,村舍，小屋,,
-,disperse,分散；驱散,,
-,prolong,延长,,
-,elasitic,弹性的；橡皮圈,plastic塑料是灵活的，弹性的,
-,expel,开除，驱逐,,
-,intermittent,间歇的，断断续续的,intermit中断,
-,crude,天然的，未加工的；粗鲁的,rude,
-,plagiarism,剽窃作品，抄袭作品,,
-,magnify,夸大，夸张,magnificient壮丽的,
-,affiliate,隶属于,,
-,porch,走廊,,
-,bulletin,公告，告示,bullet子弹 赏金猎人 公告栏,
-,convene,召开，召唤；聚集,convention大会,
-,dew,露水,dew的一声，露珠落下,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
+日期,单词,中文,联想
+2022年2月27日,deprive,剥夺,
+,metaphor,隐喻,
+,intricate,复杂的,
+,apt,恰当的,
+,bait,鱼饵,
+,foam,泡沫,
+,hasty,匆忙的，仓促的,
+,verge,边缘,
+,snobbish,势利的,
+,fixture,固定物,
+,foremost,最突出的,
+,decimal,小数，十进制,
+,inverse,倒转的，反向的,
+,incentive,诱因，刺激，动机,
+,amuse,逗笑,amusing
+,retrieve,重新得到，取回，收回,
+,maiden,少女,virgin
+2022年3月1日,rib,肋骨,
+,petty,琐碎的，微不足道的,
+,prejudice,偏见、歧视,
+,expire,终止,
+,infrared,红外线,infra+red
+,eminent,杰出的,杰出的Eminem
+,substitute,替代,substitute A for B
+,fatigue,疲劳、劳累,
+,democratic,民主的,德先生
+,hypocrisy,虚伪,hypocrite伪君子
+,exceed,超过，超出,
+,metropolitan,大都会的，大城市的,
+,bathe,（在河里、海里）游泳,区别于bath
+,courtesy,礼貌,法庭上要讲礼貌
+,fuse,合并，融合,
+,disposition,性格，性情,
+,fiscal,财政的,
+,leaflet,发传单，传单,let leaf发小叶子
+,pharmacy,药店,pharm = drug是药品相关的词根
+,duplicate,复制，被复制,"copy, replicate, duplicate"
+,scarce,缺乏的，缺少的,scarce metals 稀有金属，lack
+,freelance,自由职业的,
+,appal,使得惊骇,区分appal（吓人）和appeal（吸引人）
+2022年3月7日,revenue,财政收入,
+,component,部件，零件；组成的,
+,coalition,结合体，同盟,
+,cottage,村舍，小屋,
+,disperse,分散；驱散,
+,prolong,延长,
+,elasitic,弹性的；橡皮圈,plastic塑料是灵活的，弹性的
+,expel,开除，驱逐,
+,intermittent,间歇的，断断续续的,intermit中断
+,crude,天然的，未加工的；粗鲁的,rude
+,plagiarism,剽窃作品，抄袭作品,
+,magnify,夸大，夸张,magnificient壮丽的
+,affiliate,隶属于,
+,porch,走廊,
+,bulletin,公告，告示,bullet子弹 赏金猎人 公告栏
+,convene,召开，召唤；聚集,convention大会
+,dew,露水,dew的一声，露珠落下
+2022年3月8日,crane,伸长；鹤,鹤的脖子是伸长的；Yellow Crane Tower
+,deed,行为，所做的事,in deed
+,blend,融合，混合,blender
+,veto,反对,veto to vote 反对投票 blackball反对
+,memorandum,备忘录,
+,swell,肿胀,
+,adequate,足够的,scarce缺乏的
+,influenza,流行性感冒,拉丁人认为流感是星体影响（influentia ）人体导致的，于是influence和influenza同源
+,advocate,主张,
+,bid,投标，出价,
+,coherent,连贯的，附着的,
+,hazard,危险，隐患,biohazard生化危机
+,prone,易于发生的（不好的事）,be prone to cancer
+,dedicate,献身于,dedicate = devote
+,reckon,认为，指望,
+,obliged,必要；强迫，迫使,根据法律强迫做
+,ignite,点燃,一个night -> 晚上需要发光
+,peep,偷看,
+,property,资产，财产,
+,deduct,扣除；演绎,
+,sibling,兄弟姐妹,
+,specimen,标本，样本,sample更多是统计样本，specimen更多是植物标本
+,deplete,大量减少，耗尽,深深的（deep）删除（delete） = 大量减少
+,spectacular,壮观的，引人注目的,
+,clockwise,顺时针方向的,anticlockwise逆时针的
+,projector,投影仪,project还有发射，放映的意思
+,fixture,固定物,
+,denounce,谴责，指责,负面的（de-）宣布发表（announce）= 谴责denounce
+,aggravate,加重，恶化,
+2022年3月9日,accordance,符合，一致,
+,refugee,难民，避难者,难民很容易被其他国家拒接（refuse）
+,viable,有望成功的，切实可行的,
+,gracious,慈祥的，有礼貌的，华美的,
+,toll,伤亡人数，损失，代价,death toll
+,comply,依从，顺从,
+,regime,组织方法，管理体制；（尤指独裁的）政府，政权,区域，地方（region）就会有政权（regime）
+,prescription,处方,提前（pre-）开的单子（script）
+,deem,认为，相信,deep -> deem 深信
+,magnify,夸大，夸张；放大，增强,magnificent壮丽的
+,cumulative,积累的，累计的,accumulate积累，累计
+,dip,浸，蘸；浏览，翻阅,
+,limitation,限制；缺点，缺陷,limit
+,preclude,妨碍，阻止,include包括，exclude不包括，preclude妨碍
+,inventory,详细目录，库存,发明（invent）一大堆东西之后应该有个目录和库存（inventory）
+,latent,潜在的，隐藏的,潜在的（latent） 天赋（talent）；以后（late）显现的 -> 潜在的（latent）
+2022年3月11日,ritrual,习惯，例行公事,
+,disposal,处理，解决，清楚,dispose去掉，舍弃
+,enquire,调查，询问，打听,
+,alienate,使疏远，使格格不入,让人变成alien（外来人）
+,commonwealth,共和国，联邦,联邦就是共同富裕
+,monopoly,垄断，特权,mono(单一的)+poly(极) 单一到了极点 就形成了垄断
+,cloth,布，织物,多个布组合就是衣服
+,wage,工资（尤其指日薪或周薪）,
+,asset,个人或公司的资产,
+,insult,辱骂，侮辱,
+,salvation,拯救，救助,salvage救助
+,dwelling,住宅，寓所,dweller居民
+,shed,棚，小屋；使得变得清楚，阐明,
+,discrete,分离的，互不相连的，离散的,离散的！！
+,reciprocal,互惠的；相应的,
+,boycott,抵制，拒绝购买,
+,rack,架子，支架,
+,chimney,烟囱,
+,particle,尘埃，粒子，微粒,
+,fleet,车队，舰队,
+,strip,剥夺，夺去；条，带,剥成条
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
