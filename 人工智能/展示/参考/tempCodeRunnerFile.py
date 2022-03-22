@@ -1,0 +1,1 @@
+self.is_play
