@@ -1,0 +1,13 @@
+MODULE count4
+TITLE 'count4'
+"inputs
+R, EN, CLK PIN;
+"outputs
+Q1, Q0 PIN istype 'reg';
+count=[Q1,Q0];
+EQUATIONS
+count.clk=CLK;
+count.ar=R;
+when EN==1 then count:=count+1;
+else count:=count;
+END
