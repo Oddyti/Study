@@ -8,8 +8,8 @@ C = imerode(A, B);
 D = imdilate(C, B);
 E = imdilate(D, B);
 F = imerode(E, B);
-
 f1 = figure(1);
+
 set(f1,'position',[0 0 800 600]);
 subplot(2, 2, 1);
     imshow(C);
@@ -23,4 +23,5 @@ subplot(2, 2, 3);
 subplot(2, 2, 4);
     imshow(F);
     title('F', Fontsize = 16);
+saveas(f1,'f1.png');
 
