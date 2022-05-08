@@ -1,23 +1,17 @@
 from cmath import exp
 import numpy as np
-
-
+# 定义激活函数
 def sigmod(x):
     return 1 / (1 + np.exp(-x))
-
+# 激活函数导数
 def sigmod_derivative(x):
     return x * (1 - x)
-
-
 '''
-data: 输入值
-y: 期望结果
-layer: BP网络各层的节点数
+data: 输入值，y: 期望结果，layer: BP网络各层的节点数，learn_rate: 学习率，epochs: 迭代次数
 '''
 
 
 def bp(data, y, layer,learn_rate, epochs):
-    
     # 初始化输入到隐藏层权重矩阵
     W0 = np.random.randn(layer[0], layer[1])
     # 初始化输入到隐藏层权重矩阵
@@ -46,29 +40,37 @@ def bp(data, y, layer,learn_rate, epochs):
             
         mse /= data.shape[0]
         # print('progress: ', epoch+1, 'loss=', mse)
-        
-    print('loss = \n', mse, '\n', 'input_weight\n', W0, '\n', 'output_weight\n', W1)
+    print('loss = ', mse)
+    print('W0 = ')
+    for i in W0:
+        print(i)
+    print('W1 = ')
+    for i in W1:
+        print(i)
     return W0,W1
-        
+# 主函数
 if __name__ == '__main__':
+    # 训练数据
     data = np.array([
-        [0, 0, 1, 1],
-        [0, 1, 1, 0],
-        [1, 1, 1, 1],
-        [1, 1, 1, 0]
+        [0, 0, 1],
+        [0, 1, 1],
+        [1, 0, 1],
+        [1, 1, 1]
     ])
+    # 样本标签
     y = np.array([0,1,1,0])
-    layer = [4,4,1]
-    learn_rate = 0.9
+    layer = [3,4,1]
+    learn_rate = 0.3
     epochs = 2500
     W0,W1 = bp(data, y, layer, learn_rate, epochs)
-    y_pred = []
+    y_pred = np.empty(shape = y.shape)
     # predict
     for i in range(data.shape[0]):
             # 隐藏层
             hidden = sigmod(np.dot(data[i], W0))
             # 输出层
             output = sigmod(np.dot(hidden, W1))
-            y_pred.append(output)
-    print(y_pred)
+            y_pred[i] = output[0]
+    print('y_pred = ', y_pred)
+    print('四舍五入后y_pred', np.around(y_pred))
 
