@@ -2,6 +2,7 @@ from cProfile import label
 import numpy as np
 from Conv import Conv
 from Pool import Pool
+from scipy import signal
 
 def ReLu(x):
     return np.maximum(x,0)
@@ -47,6 +48,22 @@ def CNN(data, labels, alpha, epochs, beta):
             delta_h = error_h * ReLu_derivative(hidden)
             M1 = alpha * y2_v.reshape(2000,1) @ delta_h.reshape(1, 100) + beta * M1
             W1 = W1 + M1
+
+            error_y2_v = delta_h @ W1.T
+            error_y2 = np.reshape(error_y2_v, y2.shape)
+            error_y1 = np.zeros_like(y1)
+            W0 = np.ones_like(y1) / (2*2)
+            for c in range(20):
+                error_y1[:,:,c] = np.kron(error_y2[:,:,c], np.ones((2,2)))*W0[:,:,c]
+            delta_y1 = (y1 > 0) * error_y1
+            delta1_x = np.zeros_like(kernel)            
+            for c in range(20):
+                delta1_x[:, :, c] = signal.convolve2d(data[i][:, :], np.rot90(delta_y1[:, :, c], 2), 'valid')
+            kernel_dW =delta1_x
+            kernel_moment = alpha * kernel_dW + beta * kernel_moment
+            kernel = kernel + kernel_moment
+            
+
 
             
 
