@@ -132,5 +132,9 @@
                 \end{tabular}}
     \end{table}
     ```
-
     ![image-20210705232100876](https://i.loli.net/2021/07/05/BFD28qArRvf9eWY.png)
+6. 行内公式调整为正常大小
+    ```
+    \displaystyle{\frac{n}{2}} %  将行内公式尺寸强制调整为行间公式尺寸
+    ```
+

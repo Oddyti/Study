@@ -84,9 +84,9 @@ if __name__ == '__main__':
     #     print(epoch)
     #     conv_W, hidden_W, output_W =train_neu(conv_W, hidden_W, output_W, X, D)
 
-    epochs = 100
-    alpha = 0.01
-    beta = 0.9
+    epochs = 10
+    alpha = 0.02
+    beta = 0.8
     conv_W, hidden_W, output_W, loss_list = train_neu(conv_W, hidden_W, output_W, X, D, alpha, beta, epochs)
 
     X = Images[2000:2500, :, :]
@@ -112,7 +112,7 @@ if __name__ == '__main__':
 
     fig = plt.figure()
     plt.plot(range(epochs), loss_list)
-    plt.ylabel('MSE Loss')
-    plt.xlabel('epoch')
-    plt.savefig('../figs/lab7_1.jpg',dpi = 300)
+    plt.ylabel('Loss')
+    plt.xlabel('Epochs')
+    plt.savefig('lab7_1.png',dpi = 300)
     plt.show()
