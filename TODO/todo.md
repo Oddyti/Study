@@ -32,7 +32,7 @@ Proj11-xx
 
 ### 第7次编程 - 6.10 23:55
 
-- [ ] done?
+- [x] done?
 
 在华为昇腾社区https://www.hiascend.com/edu/experiment，自选一个感兴趣的在线实验，独立完成.
 
@@ -40,7 +40,7 @@ Proj11-xx
 
 ### 第二次作业
 
-- [ ] done?
+- [x] done?
 
  [2022Assignment2.pdf](2022Assignment2.pdf) 
 
@@ -116,7 +116,7 @@ Proj11-xx
 
 ### 华为作业
 
-- [ ] done?
+- [x] done?
 
 华为project内容(占期末成绩10分)：
 
@@ -140,4 +140,4 @@ https://www.bilibili.com/video/BV1m64y1D7Q1
 
 ## 国际化缴费 - 6.13
 
-- [ ] done?
+- [ ] done?  

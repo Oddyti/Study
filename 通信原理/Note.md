@@ -168,25 +168,165 @@ $$
 
 ## 6.4 数字基带信号通过带限信道传输
 
-前一节信道为AWGN信道，带宽无限制，相当于只加了一个高斯噪声。此节讨论的是线性带限信道，相当于在加噪声前先通过一个线性滤波器。如下图：
+前一节信道为AWGN信道，带宽无限制，相当于只加了一个高斯噪声。此节讨论的是线性带限信道，相当于在加噪声前先通过一个线性滤波器。
 
-> 插图
+#### 一、数字信号通过带限信道传输
 
-信号波形：$g_T(t)$
+![资源 1](资源 1.png)
+
+信号波形：$g_T(t)$（此处只分析信道，所以用发送滤波器的波形作为信道输入）
 
 线性带限信道：$c(t) \rightarrow C(f)$
 
-通过信道输出：$h(t) = c(t)*g_T(t)$
+通过信道输出：$h(t) = c(t)*g_T(t) \quad H(f) = C(f) G_T(f)$
+
+加入高斯噪声：$r(t) = h(t)+n(t)$
+
+接受滤波器采用匹配滤波器以获得最大输出信噪比：$G_R(f) = H^*(f)e^{-j2\pi f t_0}$
+
+输出的信号分量在$t_0$的采样值为：$y_s(t_0) = \int_{-\infty}^{\infty}|H(f)^2|df = E_h$
+
+信号功率为：$E_h^2$
+
+输出高斯噪声是均值为零，功率谱密度为：$S_n(f) = \displaystyle \frac{N_0}{2}|H(f)|^2$
+
+噪声功率为：$\sigma ^2 = \int_{-\infty}^{\infty} S_n(f) df =  \displaystyle \frac{N_0EH_h}{2}$
+
+匹配滤波器输出信噪比为：$(\displaystyle \frac{S}{N}_o) = \frac{E_h^2}{N_0E_h/2} = \frac{2E_h}{N_0}$
+
+#### 二、码间干扰
+
+考虑PAM信号。
+
+![资源 1](资源 1.png)
+
+输入$a\{n\}$，则发送滤波器输出为
+$$
+v(t)=\sum_{n=-\infty}^{\infty} a_{n} g_{T}(t-n T)
+$$
+将发送滤波器与信号看成一个滤波器则其传递函数为：
+$$
+h(t)=c(t) \otimes g_{T}(t)
+$$
 
 
+则信号输出为：
+$$
+r(t)=\sum_{n=-\infty}^{\infty} a_{n} h(t-n T)+n(t) \\
+$$
+通过接受滤波器输出为：
+$$
+y(t) = \sum_{n = -\infty}^{\infty}a_nx(t-nT) +\xi(t) \\
+$$
+其中：$x(t)$为三个滤波器看成一个滤波器的传递函数, $\xi(t)$为噪声通过接收滤波器后的输出：
+$$
+x(t) = h(t) * g_R(t) = g_T(t) * c(t) * g_R(t) \\
+\xi (t) = n(t) * g_R(t)
+$$
+对$y(t)$采样后的采样值为：
+$$
+y(mT) = \sum_{n = -\infty}^{\infty}a_nx(mT-nT) +\xi(mT) \\
+简写为：\\
+y_m = \sum_{n = -\infty}^{\infty}a_nx_{m-n} +\xi_m = x_0a_m + \sum_{n \neq m} a_n x_{n-m} + \xi _m \\
+$$
+其中：
 
+**有用信号及其功率：**
 
+$ x_0a_m$  为**有用信号**，当接收滤波器与接收信号$h(t)$匹配时，有
+$$
+E_h = x_0 = \int_{-\infty}^{\infty} h^{2}(t) d t=\int_{-\infty}^{\infty}|H(f)|^{2} d f \\
+=\int_{-W}^{W}\left|G_{T}(f)\right|^{2} \cdot|C(f)|^{2}df
+$$
+**噪声信号及其功率：**
 
+$ \xi _m$为**噪声干扰**，其功率为$\sigma_{\xi}^{2} = \displaystyle \frac{N_0}{2}E_h$
 
+**码间干扰及其消除：**
 
+$ \sum_{n \neq m} a_n x_{n-m} $为码间干扰，可以通过适当设计接受滤波器和发送滤波器，使得$n\leq 0$时，$x_n = 0$，从而消除码间干扰。
 
+#### 三、眼图
 
+眼图就是把每个区间的波形叠加在一起。
 
+1. “眼睛”张开最大时刻是最佳采样时刻；
+2. 中间水平横线表示最佳判决门限电平； 
+3. 阴影区的垂直高度表示接收信号峰值失真范围
+4. 水平横线上非阴影区间长度的一半表示定时误差容限；而“眼睛” 斜边的斜率表示定时灵敏度，斜率越大，对定时误差灵敏度越高； 
+5. 在无噪声时，眼睛张开程度，即抽样时刻上下阴影区间距离一半 表示噪声容限；若在抽样时刻，噪声值大于这个容限，则发生误判；
+6. 一般M电平PAM眼图有M-1只眼睛；
+
+#### 四、无码间干扰带限信号设计准则——奈奎斯特准则
+
+对于接受滤波器采样信号输出：
+$$
+y_m = \sum_{n = -\infty}^{\infty}a_nx_{m-n} +\xi_m = x_0a_m + \sum_{n \neq m} a_n x_{n-m} + \xi _m \\
+$$
+ 无码间干扰的充要条件：
+$$
+x(n T)=\left\{\begin{array}{ll}
+1 & n=0 \\
+0 & n \neq 0
+\end{array}\right.
+$$
+奈奎斯特准则：
+$$
+x(n T)=\left\{\begin{array}{ll}
+1 & n=0 \\
+0 & n \neq 0
+\end{array}\right.
+ \quad \Leftrightarrow  \quad \sum_{m=-\infty}^{\infty} X\left(f+\frac{m}{T}\right)=T
+$$
+有关上式的讨论：
+
+因为$X(f) = G_T(f)C(F)G_R(F)$，则假定$C(f) = 0, \quad |f| > W$，则$X(f) = 0, \quad |f|>W$
+
+1. $T< \displaystyle \frac{1}{2W}$，即$\displaystyle \frac{1}{T} > 2W$
+
+这种情况下，因为$X\left(f+\displaystyle \frac{m}{T}\right)$是$X(f)$的平移叠加，此时平移间隔$\displaystyle \frac{1}{T}$大于$2W$，则无论如何平移都会出现空隙，是的无法叠加满足$X\left(f+\displaystyle \frac{m}{T}\right)=T$条件。
+
+<img src="1.png" alt="1" style="zoom:50%;" />
+
+2. $T = \displaystyle \frac{1}{2W}$，即$\displaystyle \frac{1}{T} = 2W$
+
+此时平移间隔正好等于2倍的带宽，此时只能有当
+$$
+X(f)=\left\{\begin{array}{ll}
+T & , \quad|f|<W \\
+0 & , \quad else
+\end{array}\right.
+,\qquad
+x(t) = sinc(\frac{t}{T})
+$$
+时，才能满足$X\left(f+\displaystyle \frac{m}{T}\right)=T$，使得无码间干扰。而要满足此式，现实中是很难的。
+
+<img src="2.png" alt="2" style="zoom:50%;" />
+
+3. $T> \displaystyle \frac{1}{2W}$，即$\displaystyle \frac{1}{T} < 2W$
+
+此时有重叠，可以通过设计使得重叠部分之和刚好等于$T$，从而满足$X\left(f+\displaystyle \frac{m}{T}\right)=T$条件。
+
+<img src="3.png" alt="3" style="zoom: 50%;" />
+
+并且当符号时间间隔是$T$时，符号率$R_B = 1/T$，所以可知符号率不可能大于信道带宽的2倍，即信道传输最高码率为
+$$
+R_B/W = 2 (波特/Hz)
+$$
+
+#### 五、升余弦频谱信号
+
+上一节讲到，当$T> \displaystyle \frac{1}{2W}$，即$\displaystyle \frac{1}{T} < 2W$时，可以通过设计信号波形使得满足$X\left(f+\displaystyle \frac{m}{T}\right)=T$条件，从而达到无码间干扰。而升余弦频谱信号是最常用的一种无码间干扰波形，其频率响应如下：
+$$
+X_{r c}(f)=\left\{
+\begin{array}{cc}
+T, & 0 \leq|f| \leq(1-\alpha) / 2 T \\
+\frac{T}{2}\left[1+\cos \frac{\pi T}{\alpha}\left(|f|-\frac{1-\alpha}{2 T}\right)\right], & \frac{1-\alpha}{2 T} \leq|f| \leq \frac{1+\alpha}{2 T} \\
+0, & |f|>\frac{1+\alpha}{2 T}
+\end{array}\right.
+$$
+
+#### 六、具有零码间干扰的数字PAM系统的差错概率
 
 
 
