@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 def aoa_est(mixtures, M, N, space, sr, c):
 
     theta = np.arange(0, np.pi, np.pi/200)
-
-    trans = mixtures.shape[-1]/sr
+        
     # trans the index of fft to the real fi
+    trans = mixtures.shape[-1]/sr
 
     mixtures_fft = fft(mixtures)
 
@@ -40,6 +40,7 @@ def aoa_est(mixtures, M, N, space, sr, c):
         est_aoa = theta[index]
     else:
         est_aoa = theta[sg.argrelmax(ofunction)[0]]
+    print(est_aoa)
 
     # Plot the variation of objective function with thetas. Add the plot in your assignment report.
     plt.figure
