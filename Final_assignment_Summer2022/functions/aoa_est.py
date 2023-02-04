@@ -40,7 +40,6 @@ def aoa_est(mixtures, M, N, space, sr, c):
         est_aoa = theta[index]
     else:
         est_aoa = theta[sg.argrelmax(ofunction)[0]]
-    print(est_aoa)
 
     # Plot the variation of objective function with thetas. Add the plot in your assignment report.
     plt.figure
