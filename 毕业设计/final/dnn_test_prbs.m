@@ -63,8 +63,8 @@ for SNR = 0:10
             %     x_test  = x_test_mix;
             %     y_test  = y_test_mix;
             case 4  % Train: mix, Test: mt
-                x_train = x_train_prbs;
-                y_train = y_train_prbs;
+                x_train = x_train_mix;
+                y_train = y_train_mix;
                 x_test  = x_test_mt;
                 y_test  = y_test_mt;
             % case 8  % Train: mix, Test: prbs

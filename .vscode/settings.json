@@ -5,5 +5,8 @@
     "python.pythonPath": "/Users/macbookpro/opt/anaconda3/bin/python",
     "python.analysis.extraPaths": [
         "./Final_assignment_Summer2022/functions"
-    ]
+    ],
+    "abl.checkProgressBinary": false,
+    "abl.warnConfigFile": false,
+    "python.formatting.provider": "autopep8"
 }

@@ -11,8 +11,8 @@ ac_fun = ["logsig","logsig";"logsig","tansig";"logsig","purelin";
 %% 生成码元序列
 Ms = 16;
 k = log2(Ms);
-% tx_seq_mt = randi([0 1],L*k,1);     % 梅森扭转
-load tx_seq_mt;
+tx_seq_mt = randi([0 1],L*k,1);     % 梅森扭转
+% load tx_seq_mt;
 %% 信道传输
 [sig_qam_mt,sig_sam_mt] = channel(tx_seq_mt,2);
 

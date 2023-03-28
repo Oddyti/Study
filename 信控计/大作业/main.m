@@ -1,14 +1,20 @@
-% 录制语音信号
+clear;
+clc;
+close all;
+%% 录制语音信号
     % 采样频率16000Hz，采样位数16bits，通道数1，录音时长1s
-    Fs = 16000; 
+    Fs = 48000; 
     R = audiorecorder(Fs, 16 ,1) ;
     disp('Start')
-    recordblocking(R,1);
+    recordblocking(R,2);
     disp('End');
     cmd = getaudiodata(R);
     audiowrite('MyAudio.flac', cmd, Fs);
-    % 指令读取
-    [MyAudio, fs] = audioread('MyAudio.flac');
+    
+%% 指令读取
+    [MyAudio1, fs] = audioread('MyAudio.flac');
+    AudioLength1 = length(MyAudio1);
+    MyAudio = MyAudio1(30000:60000);
     AudioLength = length(MyAudio);
     t = (0:AudioLength-1)/fs;
     fft_MyAudio = fft(MyAudio, fs);
@@ -25,10 +31,32 @@
 
 %  量化
     % 量化bit
-    qN = 8;
-    q = (1-(-1))/2^qN;
-    qAudio = floor((MyAudio + 1)/q);
+    [Vmax, ~] = max(MyAudio);
+    [Vmin, ~] = min(MyAudio);
+    qN = 4;
+    q = (Vmax-(Vmin))/(2^qN-1);
+    qAudio = [];
+    for i = 1:AudioLength
+        temp = (MyAudio(i)+Vmax)/q;
+        qAudio = [qAudio; floor(temp)];
+    end
 
+    qMin = min(qAudio);
+    qAudio2 = qAudio - qMin;
+    tx_bit_audio = [];
+    flag = [];
+    for i = 1:length(tx_bit)
+        temp = dec2bin(qAudio2(i),4)';
+        temp = str2num(temp);
+        if length(temp) > 4
+            flag = [flag, i];
+        end
+        tx_bit_audio = [tx_bit_audio; temp];
+    end
+    
+    tx_bit_aduio = tx_bit_audio(20000:52767);
+    save tx_bit_aduio.mat tx_bit_aduio;
+    
 %  信源编码
     % unique函数：对数组按升序排序，并去掉多余的重复的值
     % cell数组：元胞数组，每个单元可以储存不同类型的变量

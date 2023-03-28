@@ -19,8 +19,8 @@ function [SigQam, SigSam] = channel(txSeq, Snr)
     modSigQ = conv(SigInterpQ, Filter, 'same');
 
     %% 调制
-    txSigI = modSigI .* cos(2 * pi * fc * (0:length(modSigI) - 1) / Fs)';
-    txSigQ = modSigQ .* (-sin(2 * pi * fc * (0:length(modSigQ) - 1) / Fs))';
+    txSigI = modSigI .* cos(2 * pi * fc * (0:length(modSigI) - 1) / Fs).';
+    txSigQ = modSigQ .* (-sin(2 * pi * fc * (0:length(modSigQ) - 1) / Fs)).';
     txSig = txSigI + txSigQ;
 
     %% AWGN信道传输
@@ -29,17 +29,17 @@ function [SigQam, SigSam] = channel(txSeq, Snr)
     rxSig = awgn(txSig, Snr, 'measured');
 
     %% 解调
-    demodSeqI = 2 * rxSig .* cos(2 * pi * fc * (0:length(rxSig) - 1) / Fs)';
-    demodSeqQ = 2 * rxSig .* (-sin(2 * pi * fc * (0:length(rxSig) - 1) / Fs))';
+    demodSeqI = 2 * rxSig .* cos(2 * pi * fc * (0:length(rxSig) - 1) / Fs).';
+    demodSeqQ = 2 * rxSig .* (-sin(2 * pi * fc * (0:length(rxSig) - 1) / Fs)).';
 
     %% 匹配滤波
-    SigI = conv(demodSeqI', Filter, 'same');
-    SigQ = conv(demodSeqQ', Filter, 'same');
+    SigI = conv(demodSeqI.', Filter, 'same');
+    SigQ = conv(demodSeqQ.', Filter, 'same');
 
     %% 抽样
     SigSamI = downsample(SigI, sps);
     SigSamQ = downsample(SigQ, sps);
     SigSam = SigSamI + SigSamQ*1i;
 
-    SigQam = SigQam';
+    SigQam = SigQam.';
 end
