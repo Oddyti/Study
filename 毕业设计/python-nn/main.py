@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import scipy.io as scio
 import matplotlib.pyplot as plt
 
 # 绘图参数设置
@@ -10,6 +11,26 @@ plt.rcParams['axes.unicode_minus'] = False
 class THZ:
     def __init__(self, a):
         self.a = a
+
+    def load_data(self, data_path, data_type):
+        # 用以导入所需要的数据类型
+        # 变量说明
+        # data_path: 数据路径
+        # data_type: 需要导入的数据类型
+        # 0: mt
+        # 1: prbs
+        # 2: mix-prbs
+        tx_bit_seq = scio.loadmat(data_path)
+        tx_bit_seq.keys()
+
+        if data_type == 0:
+            data = np.array(tx_bit_seq['tx_bit_mt'])
+        elif data_type == 1:
+            data = np.array(tx_bit_seq['tx_bit_prbs'])
+        elif data_type == 2:
+            data = np.array(tx_bit_seq['tx_bit_mix'])
+
+        return data
 
     # 定义qam调制函数，输入二进制序列，返回正交两路信号
     def qammod(self, bit_seq):
@@ -41,10 +62,10 @@ class THZ:
             if bit_seq[i+2] == 1 and bit_seq[i+3] == 1:
                 bit_seq_Q.append(-3)
 
-            bit_seq_I = np.array(bit_seq_I)
-            bit_seq_Q = np.array(bit_seq_Q)
+        bit_seq_I = np.array(bit_seq_I)
+        bit_seq_Q = np.array(bit_seq_Q)
 
-            return [bit_seq_I, bit_seq_Q]
+        return [bit_seq_I, bit_seq_Q]
 
     # 定义MZM（调制器）函数
     def MZM(self, E_in, V_data, V_pi, V_bias, T):
@@ -104,42 +125,95 @@ for i in range(len(t)-1):
     phy2t.append(phy2t[i])
     # phy1t.append(phy1t[i]+random.gauss(0,math.sqrt(delta_v1*5e-12)))
     # phy2t.append(phy2t[i]+random.gauss(0,math.sqrt(delta_v2*5e-12)))
-E1t = [E0*np.exp(1j*(2*(pi)*fc1*i*1e-15))
-       for i in range(len(t))]  # 激光器1的输出连续光波
-E2t = [E0*np.exp(1j*(2*(pi)*fc1*i*1e-15))
-       for i in range(len(t))]  # 激光器2的输出连续光波
+E1t = [E0*np.exp(1j*(2*(pi)*fc1*i*1e-15))for i in range(len(t))]
+E2t = [E0*np.exp(1j*(2*(pi)*fc2*i*1e-15))for i in range(len(t))]
 
 # MZM参数设置
-Vpi = 3.5  # 半波电压
-Vbias = 3.5  # 偏置电压
+V_pi = 3.5  # 半波电压
+V_bias = 3.5  # 偏置电压
 fd = 2e6  # 驱动电压频率
 T_last = 20  # 码元的宽度，每个码元20个采样值
-V_or = np.ceil(np.random.rand(2, 5000)-0.5)  # 这里产生随机0，1信号
-V_tr = V_or.reshape(1, 10000)
 
-'''
-系统采用16QAM调制的方法,于是要将信号的两个比特编码成四个电平，并且每个码元有两个电平(包含同向的和正交的)
-'''
-# 编码成-3，-1，1，3电平
-length = V_or.shape[1]
+bit_seq = THZ_trans.load_data('data/tx_bit_seq.mat', 0)
+[data_I, data_Q] = THZ_trans.qammod(bit_seq[0:20000])
 
-V_data = []
+# MZM调制
+[E_out_I, I_out_I] = THZ_trans.MZM(
+    E1t, data_I, V_pi, V_bias, T_last)  # 调用函数输出MZM的结果
+[E_out_Q, I_out_Q] = THZ_trans.MZM(
+    E1t, data_Q, V_pi, V_bias, T_last)  # 调用函数输出MZM的结果
 
-for i in range(length):
+# UTC-PD产生太赫兹波
+R = 0.5
+[E_Thz_I, I_Thz_I] = THZ_trans.UTC_PD(
+    E_out_I, I_out_Q, E2t, fc1, fc2, 0, 0, t, R)  # 调用UTC-PD函数
+[E_Thz_Q, I_Thz_Q] = THZ_trans.UTC_PD(
+    E_out_Q, I_out_Q, E2t, fc1, fc2, 0, 0, t, R)  # 调用UTC-PD函数
 
-    if V_or[0][i]*2+V_or[1][i] == 0:
-        V_data.append(-3)
-    if V_or[0][i]*2+V_or[1][i] == 1:
-        V_data.append(-1)
-    if V_or[0][i]*2+V_or[1][i] == 2:
-        V_data.append(1)
-    if V_or[0][i]*2+V_or[1][i] == 3:
-        V_data.append(3)
+# 引入UTC_PD的噪声
+Ip = R*pow(E0, 2)*pow(E0, 2)  # 信号产生的平均光电流
+q = 1.6e-19  # 电荷常量
+h = 6.63e-34  # 普朗克常量
+B = 1e9  # 带宽
+Kb = 1.38e-23  # 玻尔兹曼常量
+T = 300  # 温度23摄氏度
+RL = 50  # 负载50欧姆
+Fn = 1  # 噪声系数
+# 计算出噪声功率
+n_s = 2*q*Ip*B  # 量子噪声功率
+n_k = 4*Kb*T*Fn*B/RL  # 热噪声功率
+SNR = (sum(pow(np.abs(E_Thz_I), 2))/len(E_Thz_I)/(n_s+n_k))  # 信噪比
+noise = np.random.randn(len(E_Thz_I))*np.sqrt(n_s+n_k)  # 构造高斯噪声
 
-V_data = np.asarray(V_data)
+E_Thz_I_n = E_Thz_I + noise  # 带噪声的信号
+E_Thz_Q_n = E_Thz_Q + noise  # 带噪声的信号
 
-[Eout, Iout] = THZ_trans.MZM(E1t, V_data, Vpi, Vbias, T_last)  # 调用函数输出MZM的结果
+# 下变频
+fLO = 12e9  # 本振信号频率
+phyLO = 0  # 本振信号初相位
+ELO = [E0*np.exp(1j*(2*(pi)*fLO*t[i]+phyLO)) for i in range(len(t))]
+G = 24  # 倍频
+fLO_G = fLO*G  # 倍频后的频率
+ELO_G = [E0*np.exp(1j*(2*(pi)*fLO_G*t[i]+phyLO))
+         for i in range(len(t))]  # 倍频后的信号
+f_IF = abs(fc1-fc2)-fLO_G  # 产生信号的中频
+E_mi = [0.00002*E0*np.exp(1j*(2*(pi)*(fLO_G-f_IF)*t[i]+phyLO))
+        for i in range(len(t))]  # 镜像信号产生干扰
+# 第一次变频后的信号为
+EIFt = [((IThz[i]+noise[i])*E0+E0*0.00002*E0)*np.cos(2*math.pi*f_IF*t[i])
+        for i in range(len(t))]
 
-R = 0.5  # UTC_PD的响应度(单独放在这里好丑陋)
-[EThz, IThz] = THZ_trans.UTC_PD(
-    Eout, Iout, E2t, fc1, fc2, 0, 0, t, R)  # 调用UTC-PD函数
+
+# 第二次下变频
+E_mi2 = [0.00001*E0*np.exp(1j*(2*(pi)*(f_IF)*t[i]+phyLO))
+         for i in range(len(t))]  # 第二次下变频的镜像信号
+E_LAST = [(((IThz[i]+noise[i])*E0+E0*0.00002*E0)*E0+E0*E0 *
+           0.00001*E0)*np.exp(1j*0) for i in range(len(t))]
+E_LAST = np.asarray(E_LAST)
+E_LAST = E_LAST.reshape(2, -1)
+E_last = np.zeros((2, 50000))
+for i in range(50000):
+    E_last[0][i] = E_LAST[0][i] * \
+        np.cos(phy1t[i]-phy2t[i])+E_LAST[1][i]*np.sin(phy1t[i]-phy2t[i])
+    E_last[1][i] = E_LAST[1][i] * \
+        np.cos(phy1t[i]-phy2t[i])-E_LAST[0][i]*np.sin(phy1t[i]-phy2t[i])
+E_last = E_last.reshape(1, -1)
+# 画出最终的基带信号
+E_last = E_last
+
+# 考虑到相位的旋转
+E_last = E_last.reshape(2, -1)
+E_QAM_1 = [E_last[0][20*(i)+10] for i in range(2500)]
+E_QAM_2 = [E_last[1][20*(i)+10] for i in range(2500)]
+E_QAM_3 = E_LAST[0][0:2500]
+E_QAM_4 = E_LAST[1][0:2500]
+
+
+plt.figure(8)
+for j in range(2500):
+    a = E_QAM_1[j]*13.5e10
+    b = E_QAM_2[j]*13.5e10
+    complexSpot = complex(a, b)
+    plt.scatter(a, b, c='pink')
+plt.title('接收信号星座')
+plt.show()
