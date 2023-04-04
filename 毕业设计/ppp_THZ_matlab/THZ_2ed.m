@@ -1,5 +1,6 @@
 %% 说明
-% 此版本为尝试滤波改进版本
+% 此版本为尝试滤波改进版
+% 增加滤波
 clear;
 clc;
 close all;
@@ -75,5 +76,5 @@ ut_I_rx = ERx_I / (1/2 * R * E1 * E2 * E3);
 drawfft(ERx_I, fs, 5);
 
 %% 数据恢复
-seq_I_rx = acos(ut_I_rx)*2*V_pi/pi - V_bias;
+seq_I_rx = acos(ut_I_rx) * 2 * V_pi / pi - V_bias;
 drawfft(ERx_I, fs, 6);
