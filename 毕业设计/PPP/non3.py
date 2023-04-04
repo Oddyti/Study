@@ -205,7 +205,6 @@ fLO = 12e9  # 本振信号频率
 
 phyLO = 0  # 本振信号初相位
 
-ELO = [E0*np.exp(1j*(2*(pi)*fLO*t[i]+phyLO)) for i in range(len(t))]
 
 G = 24  # 倍频
 
@@ -216,8 +215,6 @@ ELO_G = [E0*np.exp(1j*(2*(pi)*fLO_G*t[i]+phyLO))
 
 f_IF = abs(fc1-fc2)-fLO_G  # 产生信号的中频
 
-E_mi = [0.00002*E0*np.exp(1j*(2*(pi)*(fLO_G-f_IF)*t[i]+phyLO))
-        for i in range(len(t))]  # 镜像信号产生干扰
 
 # 第一次变频后的信号为
 EIFt = [((IThz[i]+noise[i])*E0)*np.cos(2*math.pi*f_IF*t[i])
