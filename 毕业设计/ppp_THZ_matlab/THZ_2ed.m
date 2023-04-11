@@ -14,33 +14,35 @@ fc_2 = c / lamda2;
 fc = abs(fc_1 - fc_2);
 Ts = 1e-15;
 fs = 1 / Ts;
-t = (1:100000) * Ts;
+bit_L = 100000;
+T_last = 1000; % 码元宽度
+t = (1:bit_L/4*T_last) * Ts;
 E1 = 0.002;
 E2 = 0.002;
 phy_1 = 0;
 phy_2 = 0;
-Et_1 = E1 * exp(1i * 2 * pi * fc_1 * t + phy_1);
-Et_2 = E2 * exp(1i * 2 * pi * fc_2 * t + phy_2);
-drawfft(Et_1, fs, 1);
+Et_1 = E1 * exp( - 1i * 2 * pi * fc_1 * t + phy_1);
+Et_2 = E2 * exp( - 1i * 2 * pi * fc_2 * t + phy_2);
+drawfft(real(Et_1), fs, 1, '光载波');
 %% 数据导入
-data = load_data('data/tx_bit_seq.mat', 'mt');
+data = randi([0 1],bit_L,1); 
 
 %% 串并转换
-[seq_I, seq_Q] = qam_data(data(1:20000));
+[seq_I, seq_Q] = qam_data(data);
 
 %% MZM调制
 V_pi = 3.5; % 半波电压
 V_bias = 3.5; % 偏置电压
-T_last = 20; % 码元宽度
 [E_out_I, ut_I] = MZM(Et_1, seq_I, V_pi, V_bias, T_last);
 [E_out_Q, ut_Q] = MZM(Et_1, seq_Q, V_pi, V_bias, T_last);
-drawfft(E_out_I, fs, 2);
+drawfft(real(E_out_I), fs, 2, 'MZM调制');
+
 %% UTC-PD产生太赫兹波
 % 这里看频谱图有问题，理论上需要提高码元宽度
 R = 0.5; % UTC_PD的响应度
 E_thz_I = UTC_PD(E1, E2, fc_1, fc_2, phy_1, phy_2, ut_I, R, Ts);
 E_thz_Q = UTC_PD(E1, E2, fc_1, fc_2, phy_1, phy_2, ut_Q, R, Ts);
-drawfft(E_thz_I, fs, 3);
+drawfft2(real(E_thz_I), fs, 3, 'UTC-PD');
 
 %% 添加噪声
 Ip = R * E1 ^ 2 * E2 ^ 2;
@@ -66,15 +68,15 @@ f_IF = abs(fc_1 - fc_2) - fLO_G; % 产生信号的中频
 E3 = 0.002;
 % 第一次变频后的信号为
 E_LO = E3 * cos(2 * pi * fLO_G * t + phy_LO);
-% EIF_I = E_thz_I .* E_LO; 理论上滤波前
+EIF_I = E_thz_I .* E_LO;
 phy_IF = 0;
-EIF_I = R * E1 * E2 * E3 * ut_I * cos(2 * pi * f_IF + phy_IF); % 这里直接略去滤过过程得到结果
-drawfft(EIF_I, fs, 4);
+% EIF_I = R * E1 * E2 * E3 * ut_I * cos(2 * pi * f_IF + phy_IF); % 这里直接略去滤过过程得到结果
+drawfft2(real(EIF_I), fs, 4, '第一次滤波');
 % 第二次变频，得到ut
 ERx_I = 1/2 * R * E1 * E2 * E3 * ut_I * exp(-1i * phy_IF); % 同样直接得到结果
 ut_I_rx = ERx_I / (1/2 * R * E1 * E2 * E3);
-drawfft(ERx_I, fs, 5);
+drawfft2(real(ERx_I), fs, 5, '第二次滤波');
 
 %% 数据恢复
 seq_I_rx = acos(ut_I_rx) * 2 * V_pi / pi - V_bias;
-drawfft(ERx_I, fs, 6);
+drawfft(real(ERx_I), fs, 6, '数据恢复');

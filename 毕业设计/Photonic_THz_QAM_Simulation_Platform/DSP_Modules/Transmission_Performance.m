@@ -1,5 +1,5 @@
 %> @传输性能评估函数
-
+% 
 E_tx = modnorm(tx_sig(:), 'avpow', 1)* tx_sig;
 E_rx = modnorm(E_final(:), 'avpow', 1)* E_final;
 
@@ -8,9 +8,12 @@ Rx_seq = qamdemod(E_rx(:),M,coding,'UnitAveragePower',true); % QAM解调
 [a,b] = xcorr(Tx_seq,Rx_seq);
 loc = find(a==max(a));
 Tx_seq = Tx_seq(b(loc)+1:b(loc)+length(Rx_seq));
-E_tx_new = E_tx(b(loc)+1:b(loc)+length(E_rx));
-save E_tx_mix_train E_tx_new;
-save E_rx_mix_train E_rx;
+ [n,r]=symerr(Tx_seq, Rx_seq)
+tx_sig = tx_sig(b(loc)+1:b(loc)+length(Rx_seq));
+Tx = tx_sig *sqrt(10);
+Rx = E_final * sqrt(10);
+save E_tx_mt2.mat Tx;
+save E_rx_mt2.mat Rx;
 Tx_bit = de2bi(Tx_seq','left-msb'); % 十进制转换为二进制
 Rx_bit = de2bi(Rx_seq','left-msb'); % 十进制转换为二进制
 
@@ -23,8 +26,8 @@ scnsize = get(0,'ScreenSize');
 set(gcf,'position',[scnsize(3)/2-scnsize(4)/2-1,scnsize(4)/16,scnsize(4)+2,scnsize(4)/4-10]); % 绘图区位置
 
 % uiwait(msgbox({[' * 系统传输误码率为:',num2str(Sim_Result(1)/(1E-3)),'E-3'];...
-   % [' * 系统误比特数为:',num2str(Sim_Result(2)),'比特'];...
-   % [' * 系统总比特数为:',num2str(Sim_Result(3)),'比特']},'光电太赫兹系统','help'));
+%    [' * 系统误比特数为:',num2str(Sim_Result(2)),'比特'];...
+%    [' * 系统总比特数为:',num2str(Sim_Result(3)),'比特']},'光电太赫兹系统','help'));
 clc; close all; 
 
 Result.Performance = Sim_Result;
@@ -67,5 +70,5 @@ fprintf(1,[' * 系统误比特数为:',num2str(Sim_Result(2)),'比特\n']);
 fprintf(1,[' * 系统总比特数为:',num2str(Sim_Result(3)),'比特\n']);
 
 if Sim_Result(1)>0.1
-    % uiwait(msgbox({'@系统性能需要优化!';'@---关注OSNR、线宽等指标---';'@---调节QAM阶数等指标---'},'光电太赫兹系统','warn'));
+    uiwait(msgbox({'@系统性能需要优化!';'@---关注OSNR、线宽等指标---';'@---调节QAM阶数等指标---'},'光电太赫兹系统','warn'));
 end

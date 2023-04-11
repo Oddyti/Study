@@ -13,8 +13,10 @@ Lamda_sig = 1550E-9; % 基带调制激光器波长（单位m）
 Lamda_LO = 1/(1/(Lamda_sig/C_Light)+F_THz)*C_Light; % 本振激光器波长（单位m）;波长=时间*光速; 频率=1/时间
 Phase_sig = 0*pi; % 基带调制激光器初始相位
 Phase_LO = 0*pi; % 本振激光器初始相位
-Linewidth_sig = 2*pi*500e3; % 基带调制激光器线宽, 单位Hz
-Linewidth_LO = 2*pi*500e3; % 本振激光器线宽, 单位Hz
+% Linewidth_sig = 2*pi*500e3; % 基带调制激光器线宽, 单位Hz
+% Linewidth_LO = 2*pi*500e3; % 本振激光器线宽, 单位Hz
+Linewidth_sig = 0; % 基带调制激光器线宽, 单位Hz
+Linewidth_LO = 0; % 本振激光器线宽, 单位Hz
 
 %% 光MZM调制器
 Vpi = 3.5;  % MZM调制器Vpi值
@@ -23,7 +25,7 @@ Phi_off = pi/45; % IQ失衡度数
 
 %% 光放大器
 Noise_BW = Fb; % 噪声带宽
-OSNR_dB = 18; % 光信噪比（单位dB）
+OSNR_dB = 30; % 光信噪比（单位dB）
 
 %% 光电探测器
 R = 0.003;  % PD 响应度
@@ -35,9 +37,10 @@ T = 290; % 绝对温度
 %% 混频器
 P_THz_LO_dBm = 3; % 本振激光器输出功率（单位dBm）
 F_THz_LO = 132e9; % 太赫兹本振频率(单位Hz)
-SNR_Mixer = 18; % 太赫兹混频器信噪比（单位dB）
+SNR_Mixer = 30; % 太赫兹混频器信噪比（单位dB）
 THz_LO_Phase = 0*pi; % 太赫兹本振初始相位
-Linewidth_THz_LO = 2*pi*100e3; % 太赫兹本振线宽
+% Linewidth_THz_LO = 2*pi*100e3; % 太赫兹本振线宽
+Linewidth_THz_LO = 0; % 太赫兹本振线宽
 R_THz_Mixer = 0.3; % 太赫兹混频器转换效率
 
 %% 参数显示
@@ -55,7 +58,7 @@ R_THz_Mixer = 0.3; % 太赫兹混频器转换效率
 %     [' * 太赫兹混频器信噪比为: ',num2str(SNR_Mixer),'dB'];...
 %     [' * 太赫兹本振线宽为: ',num2str(Linewidth_THz_LO/2/pi/1e3),'kHz'];...
 %     [' ---------------------------'];...
-    
+%     
 %     [' # 调制波形主要参数:'];...
 %     [' # ','在Init_Waveform_Parameters文件定义'];...
 %     [' * 调制波形为: ',num2str(M),'QAM'];...
@@ -63,7 +66,7 @@ R_THz_Mixer = 0.3; % 太赫兹混频器转换效率
 %     [' * 发射符号数为: ','2^',num2str(log2(num_symb)),'样本点'];...
 %     [' * 脉冲成型方法为: ',PulseShaping];...
 %     [' ---------------------------'];...
-    
+%     
 %     [' # 接收DSP主要参数:'];...
 %     [' # ','在Init_DSP_Parameters文件定义'];...
 %     [' * 线性均衡器为: ',Eq_type];...

@@ -5,7 +5,7 @@
     close all; % 图片空间清空
     clc; % 显示空间清空
     warning off; % 警告不显示（可开为on）
-    draw = 0; % 为1则作图，为0仅显示最后结果
+    draw = 1; % 为1则作图，为0仅显示最后结果
     
 %% 添加子文件夹
     root = mfilename('fullpath');
