@@ -45,10 +45,10 @@ E_Dec = Time_Recovery(E_Base_IQC, Fs_awg, Fs, Fb, Nsym, txrolloff, Nss, draw);
 [E_est, ~] = Linear_Equalizer(E_Dec, Eq_type, Eq_iter, Eq_CMA_Delay, Eq_taps, Eq_mu, Eq_Adaptive_mu, Eq_conv, M, draw);
 
 %% 频偏补偿以及相噪补偿
-[E_CPR, ~] = Carrier_Recovery(E_est, BPS_PAR, BPS_N, M, Fb, draw);
+% [E_CPR, ~] = Carrier_Recovery(E_est, BPS_PAR, BPS_N, M, Fb, draw);
 
 %% 线性均衡
-[E_final, ~] = Linear_Equalizer(E_CPR, Eq_type, Eq_iter, Eq_CMA_Delay, Eq_taps, Eq_mu, Eq_Adaptive_mu, Eq_conv, M, draw);
+[E_final, ~] = Linear_Equalizer(E_est, Eq_type, Eq_iter, Eq_CMA_Delay, Eq_taps, Eq_mu, Eq_Adaptive_mu, Eq_conv, M, draw);
 
 %% 传输性能评估
 Transmission_Performance; 

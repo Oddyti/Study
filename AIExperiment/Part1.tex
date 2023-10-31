@@ -1,9 +1,9 @@
 \documentclass{../source/Experiment}
 
 \major{信息工程}
-\name{姚桂涛}
+\name{}
 \title{k-近邻算法}
-\stuid{3190105597}
+\stuid{}
 \college{信息与电子工程学院}
 \date{\today}
 \lab{教11-400}
@@ -14,41 +14,41 @@
 \exptype{设计验证}
 \partner{}
 \begin{document}
-    \makecover
-    \section{实验题目}
-        \subsection{kNN代码实现-AB分类}
-        采用测量不同特征值之间的距离方法进行分类，用所给的函数创建具有两个特征与一个标签类型的数据作为训练集，编写classify0函数对所给的数据进行AB分类。
-        \subsection{k-近邻算法改进约会网站的配对效果}
-    k-近邻算法改进约会网站的配对效果
-    通过收集的一些约会网站的数据信息，对匹配对象的归类：不喜欢的人、魅力一般的人、极具魅力的人。
+\makecover
+\section{实验题目}
+\subsection{kNN代码实现-AB分类}
+采用测量不同特征值之间的距离方法进行分类，用所给的函数创建具有两个特征与一个标签类型的数据作为训练集，编写classify0函数对所给的数据进行AB分类。
+\subsection{k-近邻算法改进约会网站的配对效果}
+k-近邻算法改进约会网站的配对效果
+通过收集的一些约会网站的数据信息，对匹配对象的归类：不喜欢的人、魅力一般的人、极具魅力的人。
 
-    数据中包含了3种特征：
+数据中包含了3种特征：
 
-    每年获得的飞行常客里程数、玩视频游戏所耗时间百分比、每周消费的冰淇淋公升数
-    
-    \section{实验代码}
-    \subsection{kNN代码实现-AB分类}
-    \lstinputlisting[
-        language  =   Python,
-        title = {kNN}
+每年获得的飞行常客里程数、玩视频游戏所耗时间百分比、每周消费的冰淇淋公升数
+
+\section{实验代码}
+\subsection{kNN代码实现-AB分类}
+\lstinputlisting[
+    language  =   Python,
+    title = {kNN}
 ]{./Part1/kNN.py}
 \lstinputlisting[
-        language  =   Python,
-        title = {tests}
+    language  =   Python,
+    title = {tests}
 ]{./Part1/tests.py}
-    \subsection{k-近邻算法改进约会网站的配对效果}
-    \lstinputlisting[
-        language  =   Python
+\subsection{k-近邻算法改进约会网站的配对效果}
+\lstinputlisting[
+    language  =   Python
 ]{./Part1/lab2.py}
-    \section{实验结果及分析}
-    \subsection{kNN代码实现-AB分类}
-    \begin{lstlisting}[language=Python]
+\section{实验结果及分析}
+\subsection{kNN代码实现-AB分类}
+\begin{lstlisting}[language=Python]
     分类结果
     [0, 0] B
     [0.8, 0.7] A
     \end{lstlisting}
-    \subsection{k-近邻算法改进约会网站的配对效果}
-    \begin{lstlisting}[language=Python]
+\subsection{k-近邻算法改进约会网站的配对效果}
+\begin{lstlisting}[language=Python]
     前20个数据测试结果和原数据比较
     ---------------------——---
         TestResult  OriginTest
@@ -76,7 +76,7 @@
     正确率97.00%
     \end{lstlisting}
 
-    从实验结果可以看出，通过k-近邻算法改进后的约会网站的配对效果比较显著，多次随机划分测试集和训练集后发现正确率基本可以达到90\%以上。
+从实验结果可以看出，通过k-近邻算法改进后的约会网站的配对效果比较显著，多次随机划分测试集和训练集后发现正确率基本可以达到90\%以上。
 
 
 \end{document}
